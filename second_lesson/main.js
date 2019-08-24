@@ -14,5 +14,6 @@ console.log(addExpenses.split(', '));
 let budgetDay;
 budgetDay = money / 30;
 console.log(budgetDay);
-budgetDay = money % 30;
+let residueBudgetDay;
+residueBudgetDay = money % 30;
 console.log(budgetDay);
