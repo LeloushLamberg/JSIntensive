@@ -1,0 +1,18 @@
+let money = 45;
+let income = 'rent';
+let addExpenses = 'rent, repair, service';
+let deposit = true;
+let mission = 320;
+let period = 6;
+console.log(typeof money);
+console.log(typeof income);
+console.log(typeof deposit);
+console.log(income.length);
+console.log('Период ', period, ' месяцев');
+console.log('Цель - заработать ', mission ,' рублей');
+console.log(addExpenses.split(', '));
+let budgetDay;
+budgetDay = money / 30;
+console.log(budgetDay);
+budgetDay = money % 30;
+console.log(budgetDay);
