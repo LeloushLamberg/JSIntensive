@@ -22,7 +22,7 @@ let budgetDay;
 budgetDay = Math.floor(budgetMonth / 30);
 console.log(budgetDay);
 if (budgetDay > 800) console.log('Высокий уровень дохода');
-else if (300 < budgetDay < 800) console.log('Средний уровень дохода');
-else if (0 < budgetDay < 300) console.log('Низкий уровень дохода');
+else if (budgetDay >300 && budgetDay < 800) console.log('Средний уровень дохода');
+else if (budgetDay > 0 && budgetDay < 300) console.log('Низкий уровень дохода');
 else if (0 > budgetDay) console.log('Что-то пошло не так');
 alert('Вам нужно '+ period+ ' месяцев, чтобы накопить '+ mission+ 'денег. Но если вы откажитесь от '+ optional2+ ', то можете сделать это быстрее. =)')
