@@ -1,26 +1,21 @@
 'use strict';
-let money = +prompt('Ваш месячный доход?'),
+let money = +prompt('Ваш месячный доход?','45000'),
     income = 'rent',
-    addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запяту.'),
+    addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запятую.','аренда, кредит'),
     deposit = confirm('У вас есть депозит в банке?'),
     mission = 320000,
     period = 6,
-    optional1 = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
-    cost1 = +prompt('Во сколько это обойдётся?'),
-    optional2 = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
-    cost2 = +prompt('Во сколько это обойдётся?');                           
-showTypeOf = function(data){
+    optional1 = prompt('Какие обязательные ежемесячные расходы у вас есть?','аренда'),
+    cost1 = +prompt('Во сколько это обойдётся?', '15000'),
+    optional2 = prompt('Какие обязательные ежемесячные расходы у вас есть?','кредит'),
+    cost2 = +prompt('Во сколько это обойдётся?','15000'),
+    showTypeOf = function(data){
   console.log(data, typeof(data))
 };
 showTypeOf (money)
 showTypeOf (income)
 showTypeOf (deposit)
 
-console.log(budgetMonth);
-period = Math.ceil(mission / budgetMonth);
-console.log('Период ', period, ' месяцев');
-console.log('Цель - заработать ', mission ,' рублей');
-console.log(addExpenses.split(', '));
 
 
 let getExpensesMonth = function(){
@@ -32,6 +27,12 @@ console.log('Расходы за месяц: ' + getExpensesMonth());
 let getAccumulatedMonth = function(){
   return money - getExpensesMonth();
 };
+
+console.log(getAccumulatedMonth());
+period = Math.ceil(mission / getAccumulatedMonth());
+console.log('Период ', period, ' месяцев');
+console.log('Цель - заработать ', mission ,' рублей');
+console.log(addExpenses.split(', '));
 
 let getTargetMonth = function(){
   return mission / getExpensesMonth()
