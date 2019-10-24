@@ -47,9 +47,9 @@ console.log('Цель будет достигнута за '+ Math.ceil(getTarge
 let getStatusIncome = function (){
   if (budgetDay > 800) {
     return ('Высокий уровень дохода');
-  } else if (budgetDay >300 && budgetDay < 800) {
+  } else if (budgetDay >300 && budgetDay <= 800) {
     return ('Средний уровень дохода');
-  } else if (budgetDay > 0 && budgetDay < 300) {
+  } else if (budgetDay >= 0 && budgetDay <= 300) {
     return ('Низкий уровень дохода');
   } else if (0 > budgetDay) {
     return ('Что-то пошло не так');
