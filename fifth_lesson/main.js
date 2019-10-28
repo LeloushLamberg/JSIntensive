@@ -8,7 +8,7 @@ let money,
     period = 6;
 
 let start = function(){
-  money = prompt('Ваш месячный доход?','45000');
+  do money = prompt('Ваш месячный доход?','45000');
   while (isNaN(money) || money == '' || money === null){
     money = prompt('Ваш месячный доход?','45000');
   };
