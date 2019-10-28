@@ -9,7 +9,7 @@ let money,
 
 let start = function(){
   money = +prompt('Ваш месячный доход?','45000');
-  while (isNaN(money) || money === '' || money === null){
+  while (isNaN(money) || money == '' || money === null){
     money = +prompt('Ваш месячный доход?','45000');
   };
 };
@@ -39,7 +39,7 @@ let getExpensesMonth = function(){
       optional2 = prompt('Какие обязательные ежемесячные расходы у вас есть?','кредит')
     };
     howMuch = +prompt('Во сколько это обойдётся?', 15000);
-    while (isNaN(howMuch) || howMuch === '' || howMuch === null){
+    while (isNaN(howMuch) || howMuch == '' || howMuch === null){
       howMuch = +prompt('Во сколько это обойдётся?', 15000);
     };
     sum += howMuch;
@@ -56,6 +56,7 @@ let getAccumulatedMonth = function(){
 };
 
 console.log(getAccumulatedMonth());
+console.log('посмотри что получилось')
 period = Math.ceil(mission / getAccumulatedMonth());
 console.log('Период ', period, ' месяцев');
 console.log('Цель - заработать ', mission ,' рублей');
@@ -64,7 +65,7 @@ console.log(addExpenses.split(', '));
 let getTargetMonth = function(){
   let freeMoney;
   freeMoney = mission / expensesAmount;
-  if (freeMoney < 0){
+  if (freeMoney <= 0){
     return alert ('Цель не будет достигнута.')
   };
   return freeMoney
@@ -74,7 +75,7 @@ let budgetDay;
 
 budgetDay = getAccumulatedMonth() / 30;
 
-console.log('Цель будет достигнута за '+ Math.ceil(getTargetMonth()) + ' месяца.');
+console.log('Цель будет достигнута за '+ period + ' месяца.');
 
 let getStatusIncome = function (){
   if (budgetDay >= 800) {
