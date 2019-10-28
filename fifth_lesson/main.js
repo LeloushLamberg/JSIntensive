@@ -8,9 +8,9 @@ let money,
     period = 6;
 
 let start = function(){
-  money = +prompt('Ваш месячный доход?','45000');
+  money = prompt('Ваш месячный доход?','45000');
   while (isNaN(money) || money == '' || money === null){
-    money = +prompt('Ваш месячный доход?','45000');
+    money = prompt('Ваш месячный доход?','45000');
   };
 };
 
@@ -64,7 +64,7 @@ console.log(addExpenses.split(', '));
 
 let getTargetMonth = function(){
   let freeMoney;
-  freeMoney = mission / expensesAmount;
+  freeMoney = mission / getAccumulatedMonth();
   if (freeMoney <= 0){
     return alert ('Цель не будет достигнута.')
   };
