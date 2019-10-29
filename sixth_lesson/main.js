@@ -25,23 +25,23 @@ let appData = {
     let addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запятую.','аренда, кредит');
     appData.addExpenses = addExpenses.toLowerCase().split(',');  
     appData.deposit = confirm('У вас есть депозит в банке?');
-
+    let howMuch;
+    let swap ;
     for (let i = 0; i < 2; i++){
+      
       if (i === 0){
-        let howMuch;
-        let swap = prompt('Какие обязательные ежемесячные расходы у вас есть?','аренда');
-        
+        swap = prompt('Какие обязательные ежемесячные расходы у вас есть?','аренда');
         };
       if (i === 1){
-        swap = prompt('Какие обязательные ежемесячные расходы у вас есть?','кредит') 
+        swap = prompt('Какие обязательные ежемесячные расходы у вас есть?','кредит') ;
       };
       do{ 
-        let howMuch = +prompt('Во сколько это обойдётся?', 15000);
+        howMuch = +prompt('Во сколько это обойдётся?', 15000);
       }
       while (isNaN(howMuch) || howMuch == '' || howMuch === null);
       
     };
-    this.expenses[swap] = howMuch
+    this.expenses[swap] = howMuch;
 
   },
   getExpensesMonth: function(){
@@ -74,7 +74,7 @@ let appData = {
   },
 };
 
-appData.asking();
+appData.asking();   
 /*
 let expensesAmount = appData.getExpensesMonth();
 
