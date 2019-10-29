@@ -9,9 +9,7 @@ let money,
 
 let start = function(){
   do money = prompt('Ваш месячный доход?','45000');
-  while (isNaN(money) || money == '' || money === null){
-    money = prompt('Ваш месячный доход?','45000');
-  };
+  while (isNaN(money) || money == '' || money === null)
 };
 
 start();
@@ -56,24 +54,30 @@ let getAccumulatedMonth = function(){
 };
 
 console.log(getAccumulatedMonth());
-console.log('посмотри что получилось')
+console.log('посмотри что получилось');
 period = Math.ceil(mission / getAccumulatedMonth());
-console.log('Период ', period, ' месяцев');
-console.log('Цель - заработать ', mission ,' рублей');
-console.log(addExpenses.split(', '));
-
-let getTargetMonth = function(){
-  let freeMoney;
-  freeMoney = mission / getAccumulatedMonth();
-  if (freeMoney <= 0){
-    return alert ('Цель не будет достигнута.')
-  };
-  return freeMoney
+if (period <= 0) { 
+  period = 'бесконечность';
+  console.log('Цель не будет достигнута.');
+} else {
+  console.log('Период ', period, ' месяцев');
 };
 
+console.log('Цель - заработать ', mission ,' рублей');
+console.log(addExpenses.split(', '));
+let freeMoney;
+let getTargetMonth = function(){
+  
+  freeMoney = mission / getAccumulatedMonth();
+  return freeMoney
+};
+freeMoney = getTargetMonth();
+if (freeMoney < 0){
+  freeMoney = 'вечность'
+} ;
 let budgetDay;
-
 budgetDay = getAccumulatedMonth() / 30;
+
 
 console.log('Цель будет достигнута за '+ period + ' месяца.');
 
@@ -84,8 +88,10 @@ let getStatusIncome = function (){
     return ('Средний уровень дохода');
   } else if (budgetDay >= 0 && budgetDay < 300) {
     return ('Низкий уровень дохода');
-  };
+  } else if (budgetDay < 0) {
+    return ('Дохода нет')
+  }
 };
 
 alert(getStatusIncome());
-alert('С таким уровнем дохода Вы сможете достигнуть цели ' + mission + 'за ' + Math.ceil(getTargetMonth()) + ' месяца.')
+alert('С таким уровнем дохода Вы сможете достигнуть цели ' + mission + 'за ' + freeMoney + ' месяца.');
