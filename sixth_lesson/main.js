@@ -28,7 +28,7 @@ let appData = {
 
     for (let i = 0; i < 2; i++){
       if (i === 0){
-        let howMuch
+        let howMuch;
         let swap = prompt('Какие обязательные ежемесячные расходы у вас есть?','аренда');
         
         };
@@ -74,7 +74,8 @@ let appData = {
   },
 };
 
-
+appData.asking();
+/*
 let expensesAmount = appData.getExpensesMonth();
 
 appData.period = Math.ceil(appData.mission / appData.budgetMonth);
@@ -92,11 +93,11 @@ alert(appData.getStatusIncome());
 alert('С таким уровнем дохода Вы сможете достигнуть цели ' + appData.mission + ' за ' + appData.period + ' месяца.');
 
 for (let key in appData){
-  console.log('наша программа включает в себя данные: ' + key + ' : ' + appData[key]))
-
-console.log(appData.expenses)
+  console.log('наша программа включает в себя данные: ' + key + ' : ' + appData[key])
+};
+console.log(appData.expenses);
 console.log('Расходы за месяц: ' + expensesAmount);
 console.log(appData.budgetMonth);
 console.log('Период ', appData.period, ' месяцев');
 console.log('Цель - заработать ', appData.mission ,' рублей');
-console.log('Цель будет достигнута за '+ appData.period + ' месяца.');
+console.log('Цель будет достигнута за '+ appData.period + ' месяца.');*/
