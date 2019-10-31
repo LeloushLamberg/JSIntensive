@@ -52,7 +52,7 @@ let appData = {
     };
   },
   getBudget: function () {
-    this.budgetMonth = money - appData.getExpensesMonth();
+    this.budgetMonth = money - this.expensesMonth;
     this.budgetDay = this.budgetMonth / 30
   },
   getTargetMonth: function () {
