@@ -39,17 +39,17 @@ let appData = {
         howMuch = +prompt('Во сколько это обойдётся?', 15000);
       }
       while (isNaN(howMuch) || howMuch == '' || howMuch === null);
-
+      
+      this.expenses[swap] = howMuch;
     };
-    this.expenses[swap] = howMuch;
 
   },
   getExpensesMonth: function () {
     let swap = 0;
     for (let key in this.expenses) {
       swap = appData.expenses[key]
+      this.expensesMonth = this.expensesMonth + swap;
     };
-    this.expensesMonth = this.expensesMonth + swap;
   },
   getBudget: function () {
     this.budgetMonth = money - appData.getExpensesMonth();
@@ -79,7 +79,7 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getStatusIncome();
 
-console.log('appData.income ' + appData.income)
+console.log(appData.income)
 console.log('appData.addIncome ' + appData.addIncome)
 console.log('appData.expenses ' + appData.expenses)
 console.log('appData.addExpenses ' + appData.addExpenses)
