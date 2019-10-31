@@ -69,7 +69,7 @@ let appData = {
     } else if (this.budgetDay >= 0 && this.budgetDay < 300) {
       return ('Низкий уровень дохода');
     } else if (this.budgetDay < 0) {
-      return ('Дохода нет')
+      return ('Нет никакого дохода')
     }
   },
 };
@@ -78,6 +78,11 @@ appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
 appData.getStatusIncome();
+
+appData.period = Math.ceil(appData.mission / appData.budgetMonth);
+if (appData.period <= 0){
+  appData.period = 'никогда (то есть вечность)'
+}
 
 console.log('appData.income');
 console.log(appData.income);
@@ -112,38 +117,27 @@ console.log(appData.budgetMonth);
 console.log('appData.expensesMonth');
 console.log(appData.expensesMonth);
 
+alert('У Вас ' + appData.getStatusIncome());
 
-
-
-
-
-
-/*
+alert('С таким уровнем дохода Вы сможете достигнуть цели ' + appData.mission + ' за ' + appData.period + ' месяца.');
 let expensesAmount = appData.getExpensesMonth();
 
-appData.period = Math.ceil(appData.mission / appData.budgetMonth);
-if (appData.period <= 0){
-  appData.period = 'никогда (то есть вечность)'
-}
-
+console.log('Расходы за месяц: ' + expensesAmount);
+console.log('Цель - заработать ', appData.mission ,' рублей');
+console.log('Цель будет достигнута за '+ appData.period + ' месяца.');
+console.log('наша программа включает в себя данные:');
+for (let key in appData){
+  
+  console.log(key + ' : ' + appData[key])
+};
+/*
 let freeMoney;
 freeMoney = appData.getTargetMonth();
 if (freeMoney < 0){
   freeMoney = 'Ваши финансы поют романсы.'
 } ;
 
-
-
-alert('getStatusIncome = ' + appData.getStatusIncome());
-alert('С таким уровнем дохода Вы сможете достигнуть цели ' + appData.mission + ' за ' + appData.period + ' месяца.');
-
-for (let key in appData){
-  console.log('наша программа включает в себя данные: ' + key + ' : ' + appData[key])
-};
 console.log(appData.expenses);
 console.log(appData.getExpensesMonth());
-console.log('Расходы за месяц: ' + expensesAmount);
 console.log(appData.budgetMonth);
-console.log('Период ', appData.period, ' месяцев');
-console.log('Цель - заработать ', appData.mission ,' рублей');
-console.log('Цель будет достигнута за '+ appData.period + ' месяца.');*/
+console.log('Период ', appData.period, ' месяцев');*/
