@@ -79,17 +79,38 @@ appData.getExpensesMonth();
 appData.getBudget();
 appData.getStatusIncome();
 
-console.log(appData.income)
-console.log('appData.addIncome ' + appData.addIncome)
-console.log('appData.expenses ' + appData.expenses)
-console.log('appData.addExpenses ' + appData.addExpenses)
-console.log('appData.deposit ' + appData.deposit)
-console.log('appData.mission ' + appData.mission)
-console.log('appData.period ' + appData.period)
-console.log('appData.budget ' + appData.budget)
-console.log('appData.budgetDay ' + appData.budgetDay)
-console.log('appData.budgetMonth ' + appData.budgetMonth)
-console.log('appData.expensesMonth ' + appData.expensesMonth)
+console.log('appData.income');
+console.log(appData.income);
+
+console.log('appData.addIncome');
+console.log(appData.addIncome);
+
+console.log('appData.expenses');
+console.log(appData.expenses);
+
+console.log('appData.addExpenses');
+console.log(appData.addExpenses);
+
+console.log('appData.deposit');
+console.log(appData.deposit);
+
+console.log('appData.mission');
+console.log(appData.mission);
+
+console.log('appData.period');
+console.log(appData.period);
+
+console.log('appData.budget');
+console.log(appData.budget);
+
+console.log('appData.budgetDay');
+console.log(appData.budgetDay);
+
+console.log('appData.budgetMonth');
+console.log(appData.budgetMonth);
+
+console.log('appData.expensesMonth');
+console.log(appData.expensesMonth);
 
 
 
