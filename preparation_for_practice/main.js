@@ -130,3 +130,5 @@ for (let key in appData){
   
   console.log(key + ' : ' + appData[key])
 };
+
+console.log(addExpenses.toLowerCase().split(', '));
