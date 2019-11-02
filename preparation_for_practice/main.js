@@ -24,11 +24,17 @@ let appData = {
   expensesMonth: 0,
   asking: function () {
     let addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запятую.', 'жильё, кредит');
-    console.log(addExpenses.toLowerCase().split(', '));
+    
+    console.log(addExpenses.toUpperCase().split(', '));
+    
     appData.addExpenses = addExpenses.toLowerCase().split(', ');
     let addIncome = prompt('Перечислите возможные доходы за расчитываемый период через запятую.', 'аренда, такси');
     appData.addIncome = addIncome.toLowerCase().split(', ');
-    let deposit = confirm('У вас есть депозит в банке?');
+    let deposit 
+    do {
+      deposit = confirm('У вас есть депозит в банке?');
+    };
+    while (isNaN(deposit) || deposit === null);)
     if (deposit){
       appData.deposit = +prompt('какая сумма депозита?', 50000);
       appData.percent = +prompt('какой процент?', 5);
