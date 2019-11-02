@@ -15,6 +15,7 @@ let appData = {
   expenses: {},
   addExpenses: [],
   deposit: false,
+  percent: 0,
   mission: 320000,
   period: 6,
   budget: money,
@@ -22,15 +23,35 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   asking: function () {
-    let addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запятую.', 'аренда, кредит');
-    appData.addExpenses = addExpenses.toLowerCase().split(',');
-    appData.deposit = confirm('У вас есть депозит в банке?');
+    let addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запятую.', 'жильё, кредит');
+    console.log(addExpenses.toLowerCase().split(', '));
+    appData.addExpenses = addExpenses.toLowerCase().split(', ');
+    let addIncome = prompt('Перечислите возможные доходы за расчитываемый период через запятую.', 'аренда, такси');
+    appData.addIncome = addIncome.toLowerCase().split(', ');
+    let deposit = confirm('У вас есть депозит в банке?');
+    if (deposit){
+      appData.deposit = +prompt('какая сумма депозита?', 50000);
+      appData.percent = +prompt('какой процент?', 5);
+    };
+
     let howMuch;
     let swap;
     for (let i = 0; i < 2; i++) {
-
       if (i === 0) {
-        swap = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'аренда');
+        swap = prompt('Какие дополнительные доходы у вас есть?', 'аренда');
+      };
+      if (i === 1) {
+        swap = prompt('Какие дополнительные доходы у вас есть?', 'такси');
+      };
+      do {
+        howMuch = +prompt('Во сколько это обойдётся?', 10000);
+      }
+      while (isNaN(howMuch) || howMuch == '' || howMuch === null);
+      appData.income[swap] = howMuch;
+    };
+    for (let i = 0; i < 2; i++) {
+      if (i === 0) {
+        swap = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'комуналка');
       };
       if (i === 1) {
         swap = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'кредит');
@@ -39,36 +60,34 @@ let appData = {
         howMuch = +prompt('Во сколько это обойдётся?', 15000);
       }
       while (isNaN(howMuch) || howMuch == '' || howMuch === null);
-      
-      this.expenses[swap] = howMuch;
+      appData.expenses[swap] = howMuch;
     };
-
   },
   getExpensesMonth: function () {
     let swap = 0;
-    for (let key in this.expenses) {
+    for (let key in appData.expenses) {
       swap = appData.expenses[key]
-      this.expensesMonth = this.expensesMonth + swap;
+      appData.expensesMonth = appData.expensesMonth + swap;
     };
   },
   getBudget: function () {
-    this.budgetMonth = money - this.expensesMonth;
-    this.budgetDay = this.budgetMonth / 30
+    appData.budgetMonth = money - appData.expensesMonth;
+    appData.budgetDay = appData.budgetMonth / 30
   },
   getTargetMonth: function () {
 
-    let freeMoney = this.mission / this.getBudget;
+    let freeMoney = appData.mission / appData.getBudget;
     return freeMoney
   },
 
   getStatusIncome: function () {
-    if (this.budgetDay >= 800) {
+    if (appData.budgetDay >= 800) {
       return ('Высокий уровень дохода');
-    } else if (this.budgetDay >= 300 && this.budgetDay < 800) {
+    } else if (appData.budgetDay >= 300 && appData.budgetDay < 800) {
       return ('Средний уровень дохода');
-    } else if (this.budgetDay >= 0 && this.budgetDay < 300) {
+    } else if (appData.budgetDay >= 0 && appData.budgetDay < 300) {
       return ('Низкий уровень дохода');
-    } else if (this.budgetDay < 0) {
+    } else if (appData.budgetDay < 0) {
       return ('Нет никакого дохода')
     }
   },
@@ -131,4 +150,4 @@ for (let key in appData){
   console.log(key + ' : ' + appData[key])
 };
 
-console.log(addExpenses.toLowerCase().split(', '));
+console.log(appData.percent);
