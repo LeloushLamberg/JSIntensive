@@ -23,25 +23,30 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   asking: function () {
+    let swap;
+    let howMuch;
+    
     let addExpenses = prompt('Перечислите возможные расходы за расчитываемый период через запятую.', 'жильё, кредит');
+    addExpenses = addExpenses.toLowerCase().split(',');
+    getBigLetterArr(addExpenses);
+    addExpenses = addExpenses.join(', ')
+    console.log('addExpenses ' + addExpenses);
     
-    console.log(addExpenses.toUpperCase().split(', '));
-    
-    appData.addExpenses = addExpenses.toLowerCase().split(', ');
+    appData.addExpenses = addExpenses;
     let addIncome = prompt('Перечислите возможные доходы за расчитываемый период через запятую.', 'аренда, такси');
     appData.addIncome = addIncome.toLowerCase().split(', ');
     let deposit 
     do {
       deposit = confirm('У вас есть депозит в банке?');
-    };
-    while (isNaN(deposit) || deposit === null);)
+    }
+    while (isNaN(deposit) || deposit === null);
     if (deposit){
       appData.deposit = +prompt('какая сумма депозита?', 50000);
       appData.percent = +prompt('какой процент?', 5);
     };
 
-    let howMuch;
-    let swap;
+    
+    
     for (let i = 0; i < 2; i++) {
       if (i === 0) {
         swap = prompt('Какие дополнительные доходы у вас есть?', 'аренда');
@@ -99,6 +104,35 @@ let appData = {
   },
 };
 
+let getBigLetterArr = function(arr){
+  let swap;
+  let upperCase;
+  let resultWord;
+  for (let j=0; j < arr.length; j++){
+      swap = arr[j];
+      let i = 0;
+      if (swap[0] === ' '){
+        let noSpace = '';
+        
+        for (i=i+1; i < swap.length; i++ ){
+          noSpace = noSpace + swap[i];
+        }
+        swap = noSpace;
+      };
+      i = 0;
+      upperCase = swap[i].toUpperCase();
+      let newSwap = '';
+      for (i=i+1; i < swap.length; i++ ){
+       
+        newSwap = newSwap + swap[i];
+      };
+     
+      resultWord = upperCase + newSwap;
+      arr[j] = resultWord;
+      
+    }
+};
+
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
@@ -107,7 +141,13 @@ appData.getStatusIncome();
 appData.period = Math.ceil(appData.mission / appData.budgetMonth);
 if (appData.period <= 0){
   appData.period = 'никогда (то есть вечность)'
-}
+};
+
+
+    
+
+
+
 
 console.log('appData.income');
 console.log(appData.income);
