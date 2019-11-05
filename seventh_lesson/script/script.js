@@ -1,7 +1,7 @@
 'use strict';
 let start = document.querySelector('#start'),
-  incomeBtnPlus = document.querySelector('.income >.btn_plus'),
-  expensesBtnPlus = document.querySelector('.expenses >.btn_plus'),
+  // incomeBtnPlus = document.querySelector('.income >.btn_plus'),
+  // expensesBtnPlus = document.querySelector('.expenses >.btn_plus'),
   depositCheck = document.querySelector('#deposit-check'),
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
   budgetMonth = document.querySelector('.budget_month-value'),
@@ -20,4 +20,8 @@ let start = document.querySelector('#start'),
   depositAmount = document.querySelector('input > .deposit-amount'),
   depositPersent = document.querySelector('input > .deposit-persent'),
   targetAmount = document.querySelector('input > .target-amount'),
-  periodSelect = document.querySelector('input > .period-select');
+  periodSelect = document.querySelector('input > .period-select'),
+  button = document.querySelectorAll('button'),
+  incomeBtnPlus = button[0],
+  expensesBtnPlus = button[1];
+  console.log(incomeBtnPlus, expensesBtnPlus)
