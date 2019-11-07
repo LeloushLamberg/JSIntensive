@@ -1,6 +1,7 @@
 // document.addEventListener('DOMContentLoaded', function(){
 'use strict';
 let start = document.querySelector('#start'),
+  cancel = document.querySelector('#cancel'),
   incomeBtnPlus = document.querySelector('.income >.btn_plus'),
   expensesBtnPlus = document.querySelector('.expenses >.btn_plus'),
   depositCheck = document.querySelector('#deposit-check'),
@@ -22,7 +23,7 @@ let start = document.querySelector('#start'),
   depositPercent = document.querySelector('.deposit-percent'),
   targetAmount = document.querySelector('.target-amount'),
   periodSelect = document.querySelector('.period-select'),
-  inputSectors = document.querySelectorAll('input'),
+  inputText = document.querySelectorAll('input[type=text]'),
   
   appData = {
     budget: 0,
@@ -49,9 +50,10 @@ let start = document.querySelector('#start'),
       appData.getBudget();
       appData.getAddExpenses();
       appData.getAddIncome();
-      appData.changeRange();
+      
       appData.showResult();
     },
+
     addIncomeBlock: function(){
       let cloneIncomeItem = incomeItems[0].cloneNode(true);
       incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
@@ -59,8 +61,7 @@ let start = document.querySelector('#start'),
       if (incomeItems.length === 3){
         incomeBtnPlus.style.display = 'none';
       };
-        
-      },
+    },
 
     addExpensesBlock: function(){
       let cloneExpensesItem = expensesItems[0].cloneNode(true);
@@ -69,7 +70,7 @@ let start = document.querySelector('#start'),
       if (expensesItems.length === 3){
         expensesBtnPlus.style.display = 'none';
       };    
-      },
+    },
     
     getExpenses: function(){
       expensesItems.forEach(function(item){
@@ -131,21 +132,7 @@ let start = document.querySelector('#start'),
     getTargetMonth: function () {
       return targetAmount.value / appData.budgetMonth;
     },
-    
-    getStatusIncome: function () {
-      if (appData.budgetDay >= 800) {
-        return ('Высокий уровень дохода');
-      } else if (appData.budgetDay >= 300 && appData.budgetDay < 800) {
-        return ('Средний уровень дохода');
-      } else if (appData.budgetDay >= 0 && appData.budgetDay < 300) {
-        return ('Низкий уровень дохода');
-      } else if (appData.budgetDay < 0) {
-        return ('Нет никакого дохода')
-      }
-    },
-     
-    
-
+  
     calcPeriod: function (){
       return appData.budgetMonth * periodSelect.value ;
     },
@@ -158,9 +145,10 @@ let start = document.querySelector('#start'),
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcPeriod();
+      disableInput();
     },
   },
-  
+
   getBigLetterArr = function(arr){
     let swap;
     let upperCase;
@@ -186,24 +174,45 @@ let start = document.querySelector('#start'),
         resultWord = upperCase + newSwap;
         arr[j] = resultWord;
     };
-
   };
+  
   let changeRange = function(){
+    
     let eventRange = function(event){
-      console.log(event.type);
-      console.log(event.target.value);
       document.querySelector('.period-amount').textContent = event.target.value;
     };
     periodSelect.addEventListener('change', eventRange);
+    
   };
 
+  let disableInput = function(){
+    start.style.display = 'none';
+    cancel.style.display = 'inline-block'
+    inputText.forEach(function(item){
+    item.setAttribute('disabled', 'disabled');
+    });
+  };
+
+  changeRange();
+  
+  let validationSalaryAmount = function(){
+    if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
+      start.setAttribute('disabled', 'disabled')}         
+    else {
+      start.removeAttribute('disabled', 'disabled');
+    };
+  };
+  
+
+  validationSalaryAmount();
+  salaryAmount.addEventListener('input', validationSalaryAmount);
   start.addEventListener('click', appData.start);
+  // start.addEventListener('click', disableInput());
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
  
   
-// 4) Число под полоской (range) должно меняться в зависимости от позиции range
+
 // 5) Добавить обработчик события внутри метода showResult, который будет отслеживать период и сразу менять значение в поле “Накопления за период”
-// 6) Блокировать все input[type=text] с левой стороны после нажатия кнопки рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка Сбросить (есть в верстке) на кнопку сбросить пока ничего не навешиваем
-// 7) Вместо проверки поля Месячный доход в методе Start, запретить нажатие кнопки Рассчитать пока поле Месячный доход пустой*/
+
 // });

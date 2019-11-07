@@ -63,3 +63,17 @@
   // if (appData.period <= 0){
   //   appData.period = 'никогда (то есть вечность)'
   // };
+    
+    getStatusIncome: function () {
+      if (appData.budgetDay >= 800) {
+        return ('Высокий уровень дохода');
+      } else if (appData.budgetDay >= 300 && appData.budgetDay < 800) {
+        return ('Средний уровень дохода');
+      } else if (appData.budgetDay >= 0 && appData.budgetDay < 300) {
+        return ('Низкий уровень дохода');
+      } else if (appData.budgetDay < 0) {
+        return ('Нет никакого дохода')
+      }
+    },
+     
+    
