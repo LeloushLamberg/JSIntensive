@@ -24,6 +24,7 @@ let start = document.querySelector('#start'),
   targetAmount = document.querySelector('.target-amount'),
   periodSelect = document.querySelector('.period-select'),
   inputText = document.querySelectorAll('input[type=text]'),
+  periodAmount = document.querySelector('.period-amount'),
   
   appData = {
     budget: 0,
@@ -39,10 +40,7 @@ let start = document.querySelector('#start'),
     moneyDeposit: 0,
     expensesMonth: 0,
     start: function () {
-      if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
-        alert('Не корректное значеие поля \"месячный доход\"');
-        return;
-      }
+      
       appData.budget = salaryAmount.value;
       appData.getExpenses();
       appData.getExpensesMonth();
@@ -58,6 +56,7 @@ let start = document.querySelector('#start'),
       let cloneIncomeItem = incomeItems[0].cloneNode(true);
       incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
       incomeItems = document.querySelectorAll('.income-items');
+      disableInput();
       if (incomeItems.length === 3){
         incomeBtnPlus.style.display = 'none';
       };
@@ -67,6 +66,9 @@ let start = document.querySelector('#start'),
       let cloneExpensesItem = expensesItems[0].cloneNode(true);
       expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
       expensesItems = document.querySelectorAll('.expenses-items');
+      if (start.style.display === 'none'){
+        disableInput();
+      };
       if (expensesItems.length === 3){
         expensesBtnPlus.style.display = 'none';
       };    
@@ -174,40 +176,40 @@ let start = document.querySelector('#start'),
         resultWord = upperCase + newSwap;
         arr[j] = resultWord;
     };
-  };
+  },
   
-  let changeRange = function(){
+  changeRange = function(){
     
     let eventRange = function(event){
-      document.querySelector('.period-amount').textContent = event.target.value;
+      periodAmount.textContent = event.target.value;
+      incomePeriodValue.value = appData.budgetMonth * event.target.value;
     };
     periodSelect.addEventListener('change', eventRange);
     
-  };
+  },
 
-  let disableInput = function(){
+  disableInput = function(){
     start.style.display = 'none';
     cancel.style.display = 'inline-block'
     inputText.forEach(function(item){
     item.setAttribute('disabled', 'disabled');
     });
-  };
+  },
 
-  changeRange();
-  
-  let validationSalaryAmount = function(){
+  validationSalaryAmount = function(){
     if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
       start.setAttribute('disabled', 'disabled')}         
-    else {
-      start.removeAttribute('disabled', 'disabled');
-    };
+      else {
+        start.removeAttribute('disabled', 'disabled');
+      };
   };
+    
   
-
+  
+  changeRange();
   validationSalaryAmount();
   salaryAmount.addEventListener('input', validationSalaryAmount);
   start.addEventListener('click', appData.start);
-  // start.addEventListener('click', disableInput());
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
  
