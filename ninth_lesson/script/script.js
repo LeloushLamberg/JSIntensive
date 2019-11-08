@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(){
+// document.addEventListener('DOMContentLoaded', function(){
 'use strict';
 let start = document.querySelector('#start'),
   cancel = document.querySelector('#cancel'),
@@ -41,7 +41,8 @@ let start = document.querySelector('#start'),
     expensesMonth: 0,
     start: function () {
       
-      appData.budget = salaryAmount.value;
+      
+      this.budget = salaryAmount.value;
       appData.getExpenses();
       appData.getExpensesMonth();
       appData.getIncome();
@@ -50,13 +51,16 @@ let start = document.querySelector('#start'),
       appData.getAddIncome();
       
       appData.showResult();
+      console.log(source.foo);
     },
 
     addIncomeBlock: function(){
       let cloneIncomeItem = incomeItems[0].cloneNode(true);
       incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
       incomeItems = document.querySelectorAll('.income-items');
-      disableInput();
+      if (start.style.display === 'none'){
+        disableInput();
+      };
       if (incomeItems.length === 3){
         incomeBtnPlus.style.display = 'none';
       };
@@ -118,36 +122,39 @@ let start = document.querySelector('#start'),
 
     getExpensesMonth: function () {
       let swap = 0;
-      for (let key in appData.expenses) {
-        swap = appData.expenses[key];
-        appData.expensesMonth = appData.expensesMonth + Number(swap);
+      for (let key in this.expenses) {
+        swap = this.expenses[key];
+        this.expensesMonth = this.expensesMonth + Number(swap);
         };
       
     },
     
     getBudget: function () {
-      appData.budgetMonth = +appData.budget + +appData.incomeMonth - +appData.expensesMonth;
-      appData.budgetDay = Math.floor(appData.budgetMonth / 30);
-      console.log(appData.budget, appData.budgetMonth, appData.budgetDay)
+      this.budgetMonth = +this.budget + +this.incomeMonth - +this.expensesMonth;
+      this.budgetDay = Math.floor(this.budgetMonth / 30);
     },
     
     getTargetMonth: function () {
-      return targetAmount.value / appData.budgetMonth;
+      return targetAmount.value / this.budgetMonth;
     },
   
     calcPeriod: function (){
-      return appData.budgetMonth * periodSelect.value ;
+      return this.budgetMonth * periodSelect.value ;
     },
     
     showResult: function(){
-      budgetMonthValue.value = appData.budgetMonth;
-      budgetDayValue.value = appData.budgetDay;
-      expensesMonthValue.value = appData.expensesMonth;
-      additionalExpensesValue.value = appData.addExpenses.join(', ');
-      additionalIncomeValue.value = appData.addIncome.join(', ');
-      targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-      incomePeriodValue.value = appData.calcPeriod();
+      budgetMonthValue.value = this.budgetMonth;
+      budgetDayValue.value = this.budgetDay;
+      expensesMonthValue.value = this.expensesMonth;
+      additionalExpensesValue.value = this.addExpenses.join(', ');
+      additionalIncomeValue.value = this.addIncome.join(', ');
+      targetMonthValue.value = Math.ceil(this.getTargetMonth());
+      incomePeriodValue.value = this.calcPeriod();
       disableInput();
+    },
+
+    reset: function(){
+
     },
   },
 
@@ -190,7 +197,7 @@ let start = document.querySelector('#start'),
 
   disableInput = function(){
     start.style.display = 'none';
-    cancel.style.display = 'inline-block'
+    cancel.style.display = 'inline-block';
     inputText.forEach(function(item){
     item.setAttribute('disabled', 'disabled');
     });
@@ -202,9 +209,27 @@ let start = document.querySelector('#start'),
       else {
         start.removeAttribute('disabled', 'disabled');
       };
-  };
+  },
     
-  
+  source = {
+    foo: appData,
+
+  };
+// console.log(source.foo)
+//   function returnAppData (){
+//     return this.foo;
+//   };
+
+  let reset = function(){
+    // appData = returnAppData.bind(source);
+    appData = source.foo;
+    console.log (appData);
+    start.style.display = 'inline-block';
+    cancel.style.display = 'none';
+    inputText.forEach(function(item){
+    item.removeAttribute('disabled');
+    });
+  };
   
   changeRange();
   validationSalaryAmount();
@@ -212,5 +237,13 @@ let start = document.querySelector('#start'),
   start.addEventListener('click', appData.start);
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
+  cancel.addEventListener('click', reset());
+// });
 
-});
+// 1) Привязать контекст вызова функции start к appData 
+// 3) Проверить работу кнопок плюс и input-range (исправить если что-то не работает)
+// 4) Блокировать все input[type=text] с левой стороны после нажатия кнопки рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
+// Метод reset должен всю программу возвращать в исходное состояние
+
+
+

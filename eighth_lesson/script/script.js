@@ -56,7 +56,9 @@ let start = document.querySelector('#start'),
       let cloneIncomeItem = incomeItems[0].cloneNode(true);
       incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
       incomeItems = document.querySelectorAll('.income-items');
-      disableInput();
+      if (start.style.display === 'none'){
+        disableInput();
+      };
       if (incomeItems.length === 3){
         incomeBtnPlus.style.display = 'none';
       };
@@ -190,7 +192,7 @@ let start = document.querySelector('#start'),
 
   disableInput = function(){
     start.style.display = 'none';
-    cancel.style.display = 'inline-block'
+    cancel.style.display = 'inline-block';
     inputText.forEach(function(item){
     item.setAttribute('disabled', 'disabled');
     });
