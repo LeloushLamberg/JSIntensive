@@ -26,6 +26,7 @@
     inputText = document.querySelectorAll('input[type=text]'),
     periodAmount = document.querySelector('.period-amount'),
     
+
     appData = {
       budget: 0,
       budgetDay: 0,
@@ -146,7 +147,7 @@
       disableInput: function(){
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
-        inputText = document.querySelectorAll('input[type=text]');
+        inputText = document.querySelectorAll('input[type=text]'),
         inputText.forEach(function(item){
         item.setAttribute('disabled', 'disabled');
         });
@@ -197,31 +198,60 @@
       bindChangeRange = appData.changeRange.bind(appData),
       bindValidationSalaryAmount = appData.validationSalaryAmount.bind(appData),
       bindShowResult = appData.showResult.bind(appData);
-      
-      // bind = appData..bind(appData),
-  
-    // let source = {};
-    // source.foo = appData;  
-    // let reset = function(){
-
-    //   appData = source.foo;
-      
-    //   start.style.display = 'inline-block';
-    //   cancel.style.display = 'none';
-    //   inputText.forEach(function(item){
-    //   item.removeAttribute('disabled');
-    //   });
-    // };
+   
+    let reset = function(){
+      // incomeBtnPlus.value = '',
+      // expensesBtnPlus.value = '',
+      // depositCheck.value = '',
+      // additionalIncomeItem.value = '',
+      // budgetMonthValue.value = '',
+      // budgetDayValue.value = '',
+      // expensesMonthValue.value = '',
+      // additionalIncomeValue.value = '',
+      // additionalExpensesValue.value = '',
+      // incomePeriodValue.value = '',
+      // targetMonthValue.value = '',
+      // salaryAmount.value = '',
+      // incomeTitle.value = '',
+      // incomeItems.value = '',
+      // expensesTitle.value = '',
+      // expensesItems.value = '',
+      // additionalExpensesItem.value = '',
+      // depositAmount.value = '',
+      // depositPercent.value = '',
+      // targetAmount.value = '',
+      // periodSelect.value = '',
+      // inputText.value = '',
+      // periodAmount.value = '';
+      // inputText.forEach(function(item){
+      //   item.removeAttribute('disabled');
+      //   item.value = ''
+      //   });
+    
+      start.style.display = 'inline-block';
+      cancel.style.display = 'none';
+      inputText = document.querySelectorAll('input[type=text]');
+      inputText.forEach(function(item){
+      item.removeAttribute('disabled');
+      });
+      budgetMonthValue.value = '';
+      budgetDayValue.value = '';
+      expensesMonthValue.value = '';
+      additionalExpensesValue.value = '';
+      additionalIncomeValue.value = '';
+      targetMonthValue.value = Math.ceil(this.getTargetMonth());
+      incomePeriodValue.value = this.calcPeriod();
+    };
     
     
     salaryAmount.addEventListener('input', appData.validationSalaryAmount);
     start.addEventListener('click', bindStart);
     incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
     expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
-    // cancel.addEventListener('click', reset());
+    cancel.addEventListener('click', reset);
 // });
 
-// 4) Блокировать все input[type=text] с левой стороны после нажатия кнопки рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
+// 4) кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
 // Метод reset должен всю программу возвращать в исходное состояние
 
 

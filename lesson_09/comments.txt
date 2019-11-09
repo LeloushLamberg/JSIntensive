@@ -24,6 +24,41 @@
     //       arr[j] = resultWord;
     //   };
     // },
-    
-    
+    // bind = appData..bind(appData),
   
+    
+    // function makeClone(obj) {
+      let source = {}; // Создаем новый пустой объект
+      for (let key in appData) { // Перебираем все свойства копируемого объекта
+        if (appData.hasOwnProperty(prop)) { // Только собственные свойства
+          if ("object"===typeof appData[key]) // Если свойство так же объект
+          source[key] = makeClone(appData[key]); // Делаем клон свойства
+          else
+          source[key] = appData[prop]; // Или же просто копируем значение
+        }
+      };
+    //  return source;
+    // }
+            // appData.forEach(function(item){
+            //   source.appData.item = appData.item;
+            // });
+            // console.dir(source);
+    // source.foo = appData; 
+    
+    
+     let makeClone = function (obj) {
+        let clone = {}; 
+        for (let prop in obj) { 
+          if (obj.hasOwnProperty(prop)) { 
+            if ("object"===typeof obj[prop]) {
+              clone[prop] = makeClone(obj[prop]);
+            }
+            else{
+              clone[prop] = obj[prop]; 
+            };
+          }
+        }
+       return clone;
+      }
+    let sourceAppData = makeClone(appData);
+    

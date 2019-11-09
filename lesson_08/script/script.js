@@ -150,7 +150,7 @@ let start = document.querySelector('#start'),
       });
     },  
 
-    changeRange = function(){
+    changeRange: function(){
     
       let eventRange = function(event){
         periodAmount.textContent = event.target.value;
@@ -170,7 +170,7 @@ let start = document.querySelector('#start'),
       appData.changeRange();
     },
 
-    validationSalaryAmount = function(){
+    validationSalaryAmount: function(){
       if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
         start.setAttribute('disabled', 'disabled')}         
         else {
