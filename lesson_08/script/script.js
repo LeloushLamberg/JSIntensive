@@ -149,6 +149,15 @@ let start = document.querySelector('#start'),
       item.setAttribute('disabled', 'disabled');
       });
     },  
+
+    changeRange = function(){
+    
+      let eventRange = function(event){
+        periodAmount.textContent = event.target.value;
+        incomePeriodValue.value = appData.budgetMonth * event.target.value;
+      };
+      periodSelect.addEventListener('change', eventRange);
+    },
     
     showResult: function(){
       budgetMonthValue.value = appData.budgetMonth;
@@ -158,7 +167,15 @@ let start = document.querySelector('#start'),
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcPeriod();
-     
+      appData.changeRange();
+    },
+
+    validationSalaryAmount = function(){
+      if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
+        start.setAttribute('disabled', 'disabled')}         
+        else {
+          start.removeAttribute('disabled', 'disabled');
+        };
     },
   },
 
@@ -187,32 +204,10 @@ let start = document.querySelector('#start'),
         resultWord = upperCase + newSwap;
         arr[j] = resultWord;
     };
-  },
-  
-  changeRange = function(){
-    
-    let eventRange = function(event){
-      periodAmount.textContent = event.target.value;
-      incomePeriodValue.value = appData.budgetMonth * event.target.value;
-    };
-    periodSelect.addEventListener('change', eventRange);
-    
-  },
-
-  
-  validationSalaryAmount = function(){
-    if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
-      start.setAttribute('disabled', 'disabled')}         
-      else {
-        start.removeAttribute('disabled', 'disabled');
-      };
   };
     
-  
-  
-  changeRange();
-  validationSalaryAmount();
-  salaryAmount.addEventListener('input', validationSalaryAmount);
+  appData.validationSalaryAmount();
+  salaryAmount.addEventListener('input', appData.validationSalaryAmount);
   start.addEventListener('click', appData.start);
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
