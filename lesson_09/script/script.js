@@ -41,17 +41,17 @@
       expensesMonth: 0,
       start: function () {
         
-        appData.budget = salaryAmount.value;
-        appData.getExpenses();
-        appData.getExpensesMonth();
-        appData.getIncome();
-        appData.getBudget();
-        appData.getAddExpenses();
-        appData.getAddIncome();
-        appData.disableInput();
-        appData.validationSalaryAmount();
-        appData.showResult();
-        console.log(this);
+        this.budget = salaryAmount.value;
+        this.getExpenses();
+        this.getExpensesMonth();
+        this.getIncome();
+        this.getBudget();
+        this.getAddExpenses();
+        this.getAddIncome();
+        this.disableInput();
+        this.validationSalaryAmount();
+        this.showResult();
+        
         
       },
   
@@ -108,7 +108,7 @@
           item =item.trim();
           if(item !== ''){
             appData.addExpenses.push(item);
-          }
+          };
         });
       },
       
@@ -131,16 +131,16 @@
       },
       
       getBudget: function () {
-        appData.budgetMonth = +appData.budget + +appData.incomeMonth - +appData.expensesMonth;
-        appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+        this.budgetMonth = +this.budget + +this.incomeMonth - +this.expensesMonth;
+        this.budgetDay = Math.floor(this.budgetMonth / 30);
       },
       
       getTargetMonth: function () {
-        return targetAmount.value / appData.budgetMonth;
+        return targetAmount.value / this.budgetMonth;
       },
     
       calcPeriod: function (){
-        return appData.budgetMonth * periodSelect.value ;
+        return this.budgetMonth * periodSelect.value ;
       },
       
       disableInput: function(){
@@ -171,14 +171,14 @@
       },
 
       showResult: function(){
-        budgetMonthValue.value = appData.budgetMonth;
-        budgetDayValue.value = appData.budgetDay;
-        expensesMonthValue.value = appData.expensesMonth;
-        additionalExpensesValue.value = appData.addExpenses.join(', ');
-        additionalIncomeValue.value = appData.addIncome.join(', ');
-        targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-        incomePeriodValue.value = appData.calcPeriod();
-        appData.changeRange();
+        budgetMonthValue.value = this.budgetMonth;
+        budgetDayValue.value = this.budgetDay;
+        expensesMonthValue.value = this.expensesMonth;
+        additionalExpensesValue.value = this.addExpenses.join(', ');
+        additionalIncomeValue.value = this.addIncome.join(', ');
+        targetMonthValue.value = Math.ceil(this.getTargetMonth());
+        incomePeriodValue.value = this.calcPeriod();
+        this.changeRange();
       },
     };
   
@@ -221,7 +221,6 @@
     // cancel.addEventListener('click', reset());
 // });
 
-// В нашем объекте везде использовать this как ссылку на объект appData (где это возможно)
 // 3) Проверить работу кнопок плюс и input-range (исправить если что-то не работает)
 // 4) Блокировать все input[type=text] с левой стороны после нажатия кнопки рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
 // Метод reset должен всю программу возвращать в исходное состояние
