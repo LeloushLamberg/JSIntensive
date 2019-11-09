@@ -39,7 +39,7 @@ let start = document.querySelector('#start'),
     percentDeposit: 0,
     moneyDeposit: 0,
     expensesMonth: 0,
-    start: function () {
+    begin: function () {
       
       appData.budget = salaryAmount.value;
       appData.getExpenses();
@@ -209,7 +209,7 @@ let start = document.querySelector('#start'),
   
   appData.validationSalaryAmount();
   salaryAmount.addEventListener('input', appData.validationSalaryAmount);
-  start.addEventListener('click', appData.start);
+  start.addEventListener('click', appData.begin);
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
 
