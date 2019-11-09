@@ -200,47 +200,24 @@
       bindShowResult = appData.showResult.bind(appData);
    
     let reset = function(){
-      // incomeBtnPlus.value = '',
-      // expensesBtnPlus.value = '',
-      // depositCheck.value = '',
-      // additionalIncomeItem.value = '',
-      // budgetMonthValue.value = '',
-      // budgetDayValue.value = '',
-      // expensesMonthValue.value = '',
-      // additionalIncomeValue.value = '',
-      // additionalExpensesValue.value = '',
-      // incomePeriodValue.value = '',
-      // targetMonthValue.value = '',
-      // salaryAmount.value = '',
-      // incomeTitle.value = '',
-      // incomeItems.value = '',
-      // expensesTitle.value = '',
-      // expensesItems.value = '',
-      // additionalExpensesItem.value = '',
-      // depositAmount.value = '',
-      // depositPercent.value = '',
-      // targetAmount.value = '',
-      // periodSelect.value = '',
-      // inputText.value = '',
-      // periodAmount.value = '';
-      // inputText.forEach(function(item){
-      //   item.removeAttribute('disabled');
-      //   item.value = ''
-      //   });
     
       start.style.display = 'inline-block';
       cancel.style.display = 'none';
       inputText = document.querySelectorAll('input[type=text]');
       inputText.forEach(function(item){
       item.removeAttribute('disabled');
+      item.value = '';
       });
       budgetMonthValue.value = '';
       budgetDayValue.value = '';
       expensesMonthValue.value = '';
       additionalExpensesValue.value = '';
       additionalIncomeValue.value = '';
-      targetMonthValue.value = Math.ceil(this.getTargetMonth());
-      incomePeriodValue.value = this.calcPeriod();
+      targetMonthValue.value = '';
+      incomePeriodValue.value = '';
+      periodSelect.value = '1';
+      periodAmount.textContent = '1'
+      appData.budgetMonth = 0;
     };
     
     
