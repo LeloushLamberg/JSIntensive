@@ -48,7 +48,7 @@ let start = document.querySelector('#start'),
       appData.getBudget();
       appData.getAddExpenses();
       appData.getAddIncome();
-      
+      appData.disableInput();
       appData.showResult();
     },
 
@@ -140,6 +140,15 @@ let start = document.querySelector('#start'),
     calcPeriod: function (){
       return appData.budgetMonth * periodSelect.value ;
     },
+
+    disableInput = function(){
+      start.style.display = 'none';
+      cancel.style.display = 'inline-block';
+      inputText = document.querySelectorAll('input[type=text]');
+      inputText.forEach(function(item){
+      item.setAttribute('disabled', 'disabled');
+      });
+    },  
     
     showResult: function(){
       budgetMonthValue.value = appData.budgetMonth;
@@ -149,7 +158,7 @@ let start = document.querySelector('#start'),
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcPeriod();
-      disableInput();
+     
     },
   },
 
@@ -190,14 +199,7 @@ let start = document.querySelector('#start'),
     
   },
 
-  disableInput = function(){
-    start.style.display = 'none';
-    cancel.style.display = 'inline-block';
-    inputText.forEach(function(item){
-    item.setAttribute('disabled', 'disabled');
-    });
-  },
-
+  
   validationSalaryAmount = function(){
     if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
       start.setAttribute('disabled', 'disabled')}         
