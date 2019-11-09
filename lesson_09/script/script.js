@@ -58,9 +58,9 @@
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
         incomeItems = document.querySelectorAll('.income-items');
-        if (start.style.display === 'none'){
-          disableInput();
-        };
+        // if (start.style.display === 'none'){
+        //   disableInput();
+        // };
         if (incomeItems.length === 3){
           incomeBtnPlus.style.display = 'none';
         };
@@ -70,9 +70,9 @@
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
         expensesItems = document.querySelectorAll('.expenses-items');
-        if (start.style.display === 'none'){
-          disableInput();
-        };
+        // if (start.style.display === 'none'){
+        //   disableInput();
+        // };
         if (expensesItems.length === 3){
           expensesBtnPlus.style.display = 'none';
         };    
@@ -143,7 +143,7 @@
         return appData.budgetMonth * periodSelect.value ;
       },
       
-      disableInput = function(){
+      disableInput: function(){
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
         inputText = document.querySelectorAll('input[type=text]');

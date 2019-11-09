@@ -141,7 +141,7 @@ let start = document.querySelector('#start'),
       return appData.budgetMonth * periodSelect.value ;
     },
 
-    disableInput = function(){
+    disableInput: function(){
       start.style.display = 'none';
       cancel.style.display = 'inline-block';
       inputText = document.querySelectorAll('input[type=text]');
