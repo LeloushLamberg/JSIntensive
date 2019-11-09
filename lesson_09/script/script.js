@@ -183,7 +183,22 @@
     };
   
     
-    
+    let bindStart = appData.start.bind(appData),
+      bindAddIncomeBlock = appData.addIncomeBlock.bind(appData),
+      bindAddExpensesBlock = appData.addExpensesBlock.bind(appData),
+      bindGetExpenses = appData.getExpenses.bind(appData),
+      bindGetAddIncome = appData.getAddIncome.bind(appData),
+      bindGetAddExpenses = appData.getAddExpenses.bind(appData),
+      bindGetExpensesMonth = appData.getExpensesMonth.bind(appData),
+      bindGetBudget = appData.getBudget.bind(appData),
+      bindGetTargetMonth = appData.getTargetMonth.bind(appData),
+      bindCalcPeriod = appData.calcPeriod.bind(appData),
+      bindDisableInput = appData.disableInput.bind(appData),
+      bindChangeRange = appData.changeRange.bind(appData),
+      bindValidationSalaryAmount = appData.validationSalaryAmount.bind(appData),
+      bindShowResult = appData.showResult.bind(appData);
+      
+      // bind = appData..bind(appData),
   
     // let source = {};
     // source.foo = appData;  
@@ -199,15 +214,14 @@
     // };
     
     
-    
     salaryAmount.addEventListener('input', appData.validationSalaryAmount);
-    start.addEventListener('click', appData.start);
+    start.addEventListener('click', bindStart);
     incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
     expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
     // cancel.addEventListener('click', reset());
 // });
 
-// 1) Привязать контекст вызова функции start к appData 
+// В нашем объекте везде использовать this как ссылку на объект appData (где это возможно)
 // 3) Проверить работу кнопок плюс и input-range (исправить если что-то не работает)
 // 4) Блокировать все input[type=text] с левой стороны после нажатия кнопки рассчитать, после этого кнопка Рассчитать пропадает и появляется кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
 // Метод reset должен всю программу возвращать в исходное состояние
