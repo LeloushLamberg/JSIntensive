@@ -40,7 +40,7 @@
       percentDeposit: 0,
       moneyDeposit: 0,
       expensesMonth: 0,
-      start: function () {
+      begin: function () {
         
         this.budget = salaryAmount.value;
         this.getExpenses();
@@ -132,16 +132,16 @@
       },
       
       getBudget: function () {
-        this.budgetMonth = +this.budget + +this.incomeMonth - +this.expensesMonth;
-        this.budgetDay = Math.floor(this.budgetMonth / 30);
+        appData.budgetMonth = +appData.budget + +appData.incomeMonth - +appData.expensesMonth;
+        appData.budgetDay = Math.floor(appData.budgetMonth / 30);
       },
       
       getTargetMonth: function () {
-        return targetAmount.value / this.budgetMonth;
+        return targetAmount.value / appData.budgetMonth;
       },
     
       calcPeriod: function (){
-        return this.budgetMonth * periodSelect.value ;
+        return appData.budgetMonth * periodSelect.value ;
       },
       
       disableInput: function(){
@@ -179,12 +179,12 @@
         additionalIncomeValue.value = this.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(this.getTargetMonth());
         incomePeriodValue.value = this.calcPeriod();
-        this.changeRange();
+        
       },
     };
   
     
-    let bindStart = appData.start.bind(appData),
+    let bindStart = appData.begin.bind(appData),
       bindAddIncomeBlock = appData.addIncomeBlock.bind(appData),
       bindAddExpensesBlock = appData.addExpensesBlock.bind(appData),
       bindGetExpenses = appData.getExpenses.bind(appData),
@@ -218,9 +218,19 @@
       periodSelect.value = '1';
       periodAmount.textContent = '1'
       appData.budgetMonth = 0;
+      appData.budget = 0;
+      appData.budgetDay = 0;
+      appData.budgetMonth = 0;
+      appData.incomeMonth = 0;
+      appData.deposit = false;
+      appData.percentDeposit = 0;
+      appData.moneyDeposit = 0;
+      appData.expensesMonth = 0;
+      appData.income = {};
+      appData.expenses = {};
     };
     
-    
+    appData.changeRange();
     salaryAmount.addEventListener('input', appData.validationSalaryAmount);
     start.addEventListener('click', bindStart);
     incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
