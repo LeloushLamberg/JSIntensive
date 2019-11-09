@@ -205,7 +205,8 @@ let start = document.querySelector('#start'),
         arr[j] = resultWord;
     };
   };
-    
+  
+  
   appData.validationSalaryAmount();
   salaryAmount.addEventListener('input', appData.validationSalaryAmount);
   start.addEventListener('click', appData.start);

@@ -1,0 +1,29 @@
+// getBigLetterArr = function(arr){
+    //   let swap;
+    //   let upperCase;
+    //   let resultWord;
+    //   for (let j=0; j < arr.length; j++){
+    //       swap = arr[j];
+    //       let i = 0;
+    //       if (swap[0] === ' '){
+    //         let noSpace = '';
+            
+    //         for (i=i+1; i < swap.length; i++ ){
+    //           noSpace = noSpace + swap[i];
+    //         }
+    //         swap = noSpace;
+    //       };
+    //       i = 0;
+    //       upperCase = swap[i].toUpperCase();
+    //       let newSwap = '';
+    //       for (i=i+1; i < swap.length; i++ ){
+    //         newSwap = newSwap + swap[i];
+    //       };
+         
+    //       resultWord = upperCase + newSwap;
+    //       arr[j] = resultWord;
+    //   };
+    // },
+    
+    
+  

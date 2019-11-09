@@ -49,6 +49,7 @@
         appData.getAddExpenses();
         appData.getAddIncome();
         appData.disableInput();
+        appData.validationSalaryAmount();
         appData.showResult();
         console.log(this);
         
@@ -132,7 +133,6 @@
       getBudget: function () {
         appData.budgetMonth = +appData.budget + +appData.incomeMonth - +appData.expensesMonth;
         appData.budgetDay = Math.floor(appData.budgetMonth / 30);
-        console.log(appData.budget, appData.budgetMonth, appData.budgetDay)
       },
       
       getTargetMonth: function () {
@@ -152,6 +152,24 @@
         });
       },
 
+      changeRange: function(){
+      
+        let eventRange = function(event){
+          periodAmount.textContent = event.target.value;
+          incomePeriodValue.value = appData.budgetMonth * event.target.value;
+        };
+        periodSelect.addEventListener('change', eventRange);
+        
+      },
+
+      validationSalaryAmount: function(){
+        if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
+          start.setAttribute('disabled', 'disabled')}         
+          else {
+            start.removeAttribute('disabled', 'disabled');
+          };
+      },
+
       showResult: function(){
         budgetMonthValue.value = appData.budgetMonth;
         budgetDayValue.value = appData.budgetDay;
@@ -160,75 +178,33 @@
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
         incomePeriodValue.value = appData.calcPeriod();
+        appData.changeRange();
       },
-    },
-  
-    getBigLetterArr = function(arr){
-      let swap;
-      let upperCase;
-      let resultWord;
-      for (let j=0; j < arr.length; j++){
-          swap = arr[j];
-          let i = 0;
-          if (swap[0] === ' '){
-            let noSpace = '';
-            
-            for (i=i+1; i < swap.length; i++ ){
-              noSpace = noSpace + swap[i];
-            }
-            swap = noSpace;
-          };
-          i = 0;
-          upperCase = swap[i].toUpperCase();
-          let newSwap = '';
-          for (i=i+1; i < swap.length; i++ ){
-            newSwap = newSwap + swap[i];
-          };
-         
-          resultWord = upperCase + newSwap;
-          arr[j] = resultWord;
-      };
-    },
-    
-    changeRange = function(){
-      
-      let eventRange = function(event){
-        periodAmount.textContent = event.target.value;
-        incomePeriodValue.value = appData.budgetMonth * event.target.value;
-      };
-      periodSelect.addEventListener('change', eventRange);
-      
-    },
-  
-    
-  
-    validationSalaryAmount = function(){
-      if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
-        start.setAttribute('disabled', 'disabled')}         
-        else {
-          start.removeAttribute('disabled', 'disabled');
-        };
     };
-    let source = {};
-    source.foo = appData;  
-    let reset = function(){
+  
+    
+    
+  
+    // let source = {};
+    // source.foo = appData;  
+    // let reset = function(){
 
-      appData = source.foo;
+    //   appData = source.foo;
       
-      start.style.display = 'inline-block';
-      cancel.style.display = 'none';
-      inputText.forEach(function(item){
-      item.removeAttribute('disabled');
-      });
-    };
+    //   start.style.display = 'inline-block';
+    //   cancel.style.display = 'none';
+    //   inputText.forEach(function(item){
+    //   item.removeAttribute('disabled');
+    //   });
+    // };
     
-    changeRange();
-    validationSalaryAmount();
-    salaryAmount.addEventListener('input', validationSalaryAmount);
+    
+    
+    salaryAmount.addEventListener('input', appData.validationSalaryAmount);
     start.addEventListener('click', appData.start);
     incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
     expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
-    cancel.addEventListener('click', reset());
+    // cancel.addEventListener('click', reset());
 // });
 
 // 1) Привязать контекст вызова функции start к appData 
