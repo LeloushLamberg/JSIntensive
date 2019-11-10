@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(){
+// document.addEventListener('DOMContentLoaded', function(){
 'use strict';
 let start = document.querySelector('#start'),
   cancel = document.querySelector('#cancel'),
@@ -54,8 +54,14 @@ let start = document.querySelector('#start'),
 
     addIncomeBlock: function(){
       let cloneIncomeItem = incomeItems[0].cloneNode(true);
+     
+        for (let i = 0; i < cloneIncomeItem.children.length; i++){
+          cloneIncomeItem.children[i].value = '';
+        };
+
       incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
       incomeItems = document.querySelectorAll('.income-items');
+      
       if (start.style.display === 'none'){
         disableInput();
       };
@@ -66,14 +72,33 @@ let start = document.querySelector('#start'),
 
     addExpensesBlock: function(){
       let cloneExpensesItem = expensesItems[0].cloneNode(true);
+      
+      for (let i = 0; i < cloneExpensesItem.children.length; i++){
+        cloneExpensesItem.children[i].value = '';
+      };
+
       expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
       expensesItems = document.querySelectorAll('.expenses-items');
+      
       if (start.style.display === 'none'){
         disableInput();
       };
       if (expensesItems.length === 3){
         expensesBtnPlus.style.display = 'none';
       };    
+    },
+    
+    getIncome: function(){
+      incomeItems.forEach(function(item){
+        let itemIncome = item.querySelector('.income-title').value;
+        let cashIncome = +item.querySelector('.income-amount').value;
+        if(itemIncome !== '' && cashIncome !== '' && !isNaN(cashIncome)){
+          appData.income[itemIncome] = cashIncome;
+        };
+      });
+      for (let key in appData.income){
+        appData.incomeMonth += +appData.income[key];
+      };
     },
     
     getExpenses: function(){
@@ -85,19 +110,6 @@ let start = document.querySelector('#start'),
         };                
       });
     }, 
-    
-    getIncome: function(){
-      incomeItems.forEach(function(item){
-        let itemIncome = item.querySelector('.income-title').value;
-        let cashIncome = item.querySelector('.income-amount').value;
-        if(itemIncome !== '' && cashIncome !== '' && isNaN(itemIncome) && !isNaN(cashIncome)){
-          appData.income[itemIncome] = cashIncome;
-        };
-        for (let key in appData.income){
-          appData.incomeMonth += +appData.income[key];
-        };
-      });
-    },
 
     getAddExpenses: function(){
       let addExpenses = additionalExpensesItem.value.split(',');
@@ -167,7 +179,7 @@ let start = document.querySelector('#start'),
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcPeriod();
-      appData.changeRange();
+      
     },
 
     validationSalaryAmount: function(){
@@ -206,11 +218,14 @@ let start = document.querySelector('#start'),
     };
   };
   
-  
+  appData.changeRange();
   appData.validationSalaryAmount();
   salaryAmount.addEventListener('input', appData.validationSalaryAmount);
   start.addEventListener('click', appData.begin);
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
 
-});
+// });
+// - неверный расчет если несколько доп доходов
+// - если до нажатия кнопки менять ползунок, то значение под ним не меняется
+// вчера 10:57 Нравится	• Подписаться
