@@ -58,11 +58,17 @@
   
       addIncomeBlock: function(){
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
+       
+          for (let i = 0; i < cloneIncomeItem.children.length; i++){
+            cloneIncomeItem.children[i].value = '';
+          };
+  
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
         incomeItems = document.querySelectorAll('.income-items');
-        // if (start.style.display === 'none'){
-        //   disableInput();
-        // };
+        
+        if (start.style.display === 'none'){
+          disableInput();
+        };
         if (incomeItems.length === 3){
           incomeBtnPlus.style.display = 'none';
         };
@@ -70,14 +76,33 @@
   
       addExpensesBlock: function(){
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
+        
+        for (let i = 0; i < cloneExpensesItem.children.length; i++){
+          cloneExpensesItem.children[i].value = '';
+        };
+  
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
         expensesItems = document.querySelectorAll('.expenses-items');
-        // if (start.style.display === 'none'){
-        //   disableInput();
-        // };
+        
+        if (start.style.display === 'none'){
+          disableInput();
+        };
         if (expensesItems.length === 3){
           expensesBtnPlus.style.display = 'none';
         };    
+      },
+      
+      getIncome: function(){
+        incomeItems.forEach(function(item){
+          let itemIncome = item.querySelector('.income-title').value;
+          let cashIncome = +item.querySelector('.income-amount').value;
+          if(itemIncome !== '' && cashIncome !== '' && !isNaN(cashIncome)){
+            appData.income[itemIncome] = cashIncome;
+          };
+        });
+        for (let key in appData.income){
+          appData.incomeMonth += +appData.income[key];
+        };
       },
       
       getExpenses: function(){
@@ -89,19 +114,6 @@
           };                
         });
       }, 
-      
-      getIncome: function(){
-        incomeItems.forEach(function(item){
-          let itemIncome = item.querySelector('.income-title').value;
-          let cashIncome = item.querySelector('.income-amount').value;
-          if(itemIncome !== '' && cashIncome !== '' && isNaN(itemIncome) && !isNaN(cashIncome)){
-            appData.income[itemIncome] = cashIncome;
-          };
-          for (let key in appData.income){
-            appData.incomeMonth += +appData.income[key];
-          };
-        });
-      },
   
       getAddExpenses: function(){
         let addExpenses = additionalExpensesItem.value.split(',');
