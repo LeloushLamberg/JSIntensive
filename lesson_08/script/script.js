@@ -105,7 +105,7 @@ let start = document.querySelector('#start'),
       expensesItems.forEach(function(item){
         let itemExpenses = item.querySelector('.expenses-title').value;
         let cashExpenses = item.querySelector('.expenses-amount').value;
-        if(itemExpenses !== '' && cashExpenses !== '' && isNaN(itemExpenses) && !isNaN(cashExpenses)){
+        if(itemExpenses !== '' && cashExpenses !== '' && !isNaN(cashExpenses)){
           appData.expenses[itemExpenses] = cashExpenses;
         };                
       });
@@ -227,5 +227,3 @@ let start = document.querySelector('#start'),
 
 // });
 // - неверный расчет если несколько доп доходов
-// - если до нажатия кнопки менять ползунок, то значение под ним не меняется
-// вчера 10:57 Нравится	• Подписаться
