@@ -150,10 +150,12 @@
       
       getTargetMonth: function () {
         return targetAmount.value / appData.budgetMonth;
+      console.log(this);
       },
     
       calcPeriod: function (){
         return appData.budgetMonth * periodSelect.value ;
+        console.log(this);
       },
       
       disableInput: function(){
@@ -170,6 +172,7 @@
         let eventRange = function(event){
           periodAmount.textContent = event.target.value;
           incomePeriodValue.value = appData.budgetMonth * event.target.value;
+          console.log(this);  
         };
         periodSelect.addEventListener('change', eventRange);
         
@@ -191,7 +194,7 @@
         additionalIncomeValue.value = this.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(this.getTargetMonth());
         incomePeriodValue.value = this.calcPeriod();
-        
+        console.log(this);
       },
     };
   

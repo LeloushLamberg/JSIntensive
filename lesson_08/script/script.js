@@ -1,4 +1,4 @@
-// document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function(){
 'use strict';
 let start = document.querySelector('#start'),
   cancel = document.querySelector('#cancel'),
@@ -142,7 +142,6 @@ let start = document.querySelector('#start'),
     getBudget: function () {
       appData.budgetMonth = +appData.budget + +appData.incomeMonth - +appData.expensesMonth;
       appData.budgetDay = Math.floor(appData.budgetMonth / 30);
-      console.log(appData.budget, appData.budgetMonth, appData.budgetDay)
     },
     
     getTargetMonth: function () {
@@ -171,6 +170,14 @@ let start = document.querySelector('#start'),
       periodSelect.addEventListener('change', eventRange);
     },
     
+    validationSalaryAmount: function(){
+          if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
+            start.setAttribute('disabled', 'disabled')}         
+            else {
+              start.removeAttribute('disabled', 'disabled');
+            };
+    },
+    
     showResult: function(){
       budgetMonthValue.value = appData.budgetMonth;
       budgetDayValue.value = appData.budgetDay;
@@ -180,14 +187,6 @@ let start = document.querySelector('#start'),
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcPeriod();
       
-    },
-
-    validationSalaryAmount: function(){
-      if (salaryAmount.value === '' || isNaN(salaryAmount.value)){
-        start.setAttribute('disabled', 'disabled')}         
-        else {
-          start.removeAttribute('disabled', 'disabled');
-        };
     },
   },
 
@@ -225,5 +224,5 @@ let start = document.querySelector('#start'),
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
 
-// });
-// - неверный расчет если несколько доп доходов
+});
+
