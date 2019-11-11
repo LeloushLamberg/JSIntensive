@@ -257,7 +257,20 @@ document.addEventListener('DOMContentLoaded', function(){
       appData.expenses = {};
       appData.addIncome = [];
       appData.addExpenses = [];
-      console.log('депозит чек сброс ', depositCheck)
+      incomeItems = document.querySelectorAll('.income-items');
+        for(let i = 0; i < incomeItems.length; i++){
+          if (i !== 0){
+            incomeItems[i].parentNode.removeChild(incomeItems[i]);
+          };
+        };
+      incomeBtnPlus.style.display = 'block';
+      expensesItems = document.querySelectorAll('.expenses-items');
+      for(let i = 0; i < expensesItems.length; i++){
+        if (i !== 0){
+          expensesItems[i].parentNode.removeChild(expensesItems[i]);
+        };
+      };
+      expensesBtnPlus.style.display = 'block';
     };
     
     appData.changeRange();
@@ -266,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function(){
     incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
     expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
     cancel.addEventListener('click', reset);
-    console.log('депозит чек основной ', depositCheck)
+    
 });
 
 
