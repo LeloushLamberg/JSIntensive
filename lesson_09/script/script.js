@@ -1,32 +1,39 @@
-// document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function(){
   'use strict';
   let start = document.querySelector('#start'),
     cancel = document.querySelector('#cancel'),
+
     incomeBtnPlus = document.querySelector('.income >.btn_plus'),
-    expensesBtnPlus = document.querySelector('.expenses >.btn_plus'),
-    depositCheck = document.querySelector('#deposit-check'),
-    additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
-    budgetMonthValue = document.querySelector('.budget_month-value'),
-    budgetDayValue = document.querySelector('.budget_day-value'),
-    expensesMonthValue = document.querySelector('.expenses_month-value'),
-    additionalIncomeValue = document.querySelector('.additional_income-value'),
-    additionalExpensesValue = document.querySelector('.additional_expenses-value'),
-    incomePeriodValue = document.querySelector('.income_period-value'),
-    targetMonthValue = document.querySelector('.target_month-value'),
-    salaryAmount = document.querySelector('.salary-amount'),
     incomeTitle = document.querySelector('.income-title'),
     incomeItems = document.querySelectorAll('.income-items'),
+    incomePeriodValue = document.querySelector('.income_period-value'),
+    additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+    additionalIncomeValue = document.querySelector('.additional_income-value'),
+    
+    expensesBtnPlus = document.querySelector('.expenses >.btn_plus'),
+    expensesMonthValue = document.querySelector('.expenses_month-value'),
     expensesTitle = document.querySelector('.expenses-title'),
     expensesItems = document.querySelectorAll('.expenses-items'),
+    additionalExpensesValue = document.querySelector('.additional_expenses-value'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+    
+    budgetMonthValue = document.querySelector('.budget_month-value'),
+    budgetDayValue = document.querySelector('.budget_day-value'),
+    
+    targetMonthValue = document.querySelector('.target_month-value'),
+    targetAmount = document.querySelector('.target-amount'),
+    
+    salaryAmount = document.querySelector('.salary-amount'),
+    
     depositAmount = document.querySelector('.deposit-amount'),
     depositPercent = document.querySelector('.deposit-percent'),
-    targetAmount = document.querySelector('.target-amount'),
+    depositCheck = document.querySelector('#deposit-check'),
+    
     periodSelect = document.querySelector('.period-select'),
-    inputText = document.querySelectorAll('input[type=text]'),
     periodAmount = document.querySelector('.period-amount'),
     
-
+    inputText = document.querySelectorAll('input[type=text]'),
+  
     appData = {
       budget: 0,
       budgetDay: 0,
@@ -59,10 +66,11 @@
       addIncomeBlock: function(){
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
        
-          for (let i = 0; i < cloneIncomeItem.children.length; i++){
-            cloneIncomeItem.children[i].value = '';
-          };
-  
+        for (let i = 0; i < cloneIncomeItem.children.length; i++){
+          cloneIncomeItem.children[i].value = '';
+          cloneIncomeItem.children[i].setAttribute('autofocus', 'true');
+        };
+        
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
         incomeItems = document.querySelectorAll('.income-items');
         
@@ -80,6 +88,7 @@
         for (let i = 0; i < cloneExpensesItem.children.length; i++){
           cloneExpensesItem.children[i].value = '';
         };
+        cloneExpensesItem.children[0].setAttribute('autofocus', 'true');
   
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
         expensesItems = document.querySelectorAll('.expenses-items');
@@ -109,7 +118,7 @@
         expensesItems.forEach(function(item){
           let itemExpenses = item.querySelector('.expenses-title').value;
           let cashExpenses = item.querySelector('.expenses-amount').value;
-          if(itemExpenses !== '' && cashExpenses !== '' && isNaN(itemExpenses) && !isNaN(cashExpenses)){
+          if(itemExpenses !== '' && cashExpenses !== '' && !isNaN(cashExpenses)){
             appData.expenses[itemExpenses] = cashExpenses;
           };                
         });
@@ -150,17 +159,18 @@
       
       getTargetMonth: function () {
         return targetAmount.value / appData.budgetMonth;
-      console.log(this);
+       
       },
     
       calcPeriod: function (){
         return appData.budgetMonth * periodSelect.value ;
-        console.log(this);
+        
       },
       
       disableInput: function(){
         start.style.display = 'none';
         cancel.style.display = 'inline-block';
+        depositCheck.setAttribute('disabled', 'disabled');
         inputText = document.querySelectorAll('input[type=text]'),
         inputText.forEach(function(item){
         item.setAttribute('disabled', 'disabled');
@@ -171,8 +181,7 @@
       
         let eventRange = function(event){
           periodAmount.textContent = event.target.value;
-          incomePeriodValue.value = appData.budgetMonth * event.target.value;
-          console.log(this);  
+          incomePeriodValue.value = appData.budgetMonth * event.target.value;  
         };
         periodSelect.addEventListener('change', eventRange);
         
@@ -187,6 +196,7 @@
       },
 
       showResult: function(){
+       
         budgetMonthValue.value = this.budgetMonth;
         budgetDayValue.value = this.budgetDay;
         expensesMonthValue.value = this.expensesMonth;
@@ -194,7 +204,7 @@
         additionalIncomeValue.value = this.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(this.getTargetMonth());
         incomePeriodValue.value = this.calcPeriod();
-        console.log(this);
+        console.log('депозит чек расчитать ', depositCheck)
       },
     };
   
@@ -223,6 +233,8 @@
       item.removeAttribute('disabled');
       item.value = '';
       });
+      depositCheck.removeAttribute('disabled');
+      depositCheck.checked = false;
       budgetMonthValue.value = '';
       budgetDayValue.value = '';
       expensesMonthValue.value = '';
@@ -243,6 +255,9 @@
       appData.expensesMonth = 0;
       appData.income = {};
       appData.expenses = {};
+      appData.addIncome = [];
+      appData.addExpenses = [];
+      console.log('депозит чек сброс ', depositCheck)
     };
     
     appData.changeRange();
@@ -251,10 +266,8 @@
     incomeBtnPlus.addEventListener('click', appData.addIncomeBlock);
     expensesBtnPlus.addEventListener('click', appData.addExpensesBlock);
     cancel.addEventListener('click', reset);
-// });
-
-// 4) кнопка Сбросить, на которую навешиваем событие и выполнение метода reset
-// Метод reset должен всю программу возвращать в исходное состояние
+    console.log('депозит чек основной ', depositCheck)
+});
 
 
 
