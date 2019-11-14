@@ -10,28 +10,42 @@
     this.fontSize = options.fontSize;
     this.getSelector = function(){
       let newDiv;
+     
       newDiv = document.createElement('div');
-      
-      if (this.selector.indexOf('.', 0)){
-       
-        newDiv.setAttribute('class', this.selector);
-        return newDiv;
-      };
-      if (this.selector.indexOf('#', 0)){
+      let hit = '';
+      hit = this.selector;
+     
+      if (hit[0] === '.'){
+        let cls = '';
         
-        newDiv.setAttribute('id', this.selector);
-        return newDiv;
+        for (let i = 1; i < hit.length; i++){
+          cls += hit[i];
+        };
+        newDiv.className = cls;
+        
       };
-      let styleList = 'width: ' + this.width + '; height: ' + this.height + '; bacground: ' + this.bg + '; font-size: ' + this.fontSize + ';'
-      console.log(styleList);
+      if (hit[0] === '#'){
+        let ind = '';
+        for (let i = 1; i < this.selector.length; i++){
+          ind +=  this.selector[i];
+        };
+        
+        newDiv.id = ind;
+       
+      };
+      let styleList = 'width: ' + this.width + '; height: ' + this.height + '; background: ' + this.bg + '; font-size: ' + this.fontSize + ';'
+      
       newDiv.style.cssText = styleList;
+      
       return newDiv;
+
     };
   };
   
-  let swap = new DomElement('.begin', {width: '300px', height: '100px', bg: 'green', fontSize: '16px'});
+  let swap = new DomElement('.begin', {width: '300px', height: '100px', bg: 'green', fontSize: '32px'});
   
   let begin = swap.getSelector();
+  
   begin.textContent = 'Какой же ты сложный, JS!!! )))';
   
   document.body.append(begin);
