@@ -263,12 +263,11 @@ AppData.prototype.reset = function () {
 };
 
 AppData.prototype.eventsListeners = function(){
-  console.log( 'event ', this);
+  
   salaryAmount.addEventListener('input', this.validationSalaryAmount);
   periodSelect.addEventListener('change', this.eventRange);
   incomeBtnPlus.addEventListener('click', this.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', this.addExpensesBlock);
-  appData.validationSalaryAmount.bind(AppData)
   
   start.addEventListener('click', appData.start.bind(appData));
   cancel.addEventListener('click', appData.reset.bind(appData));
@@ -280,12 +279,7 @@ Object.setPrototypeOf(appData, AppData.prototype)
 appData.prototype = Object.create(AppData.prototype);
 appData.prototype.constructor = appData;
 
-console.log(appData.start instanceof AppData) ;
-
-console.dir(appData);
 appData.eventsListeners();
-// cancel.addEventListener('click', appData.reset.bind(appData));
-// start.addEventListener('click', appData.start.bind(appData));
 
 // });
 
