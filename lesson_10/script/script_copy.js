@@ -63,3 +63,13 @@ let bindStart = appData.begin.bind(appData),
       bindValidationSalaryAmount = appData.validationSalaryAmount.bind(appData),
       bindShowResult = appData.showResult.bind(appData);
    
+
+// // клон obj c тем же прототипом (с поверхностным копированием свойств)
+
+// let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+
+// Такой вызов создаёт точную копию объекта obj, включая все свойства: 
+
+// перечисляемые и неперечисляемые, геттеры/сеттеры для свойств – 
+
+// и всё это с правильным свойством [[Prototype]].

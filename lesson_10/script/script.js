@@ -49,8 +49,9 @@ const AppData = function () {
   this.expensesMonth = 0;
 };
 
-AppData.prototype.begin = function () {
-console.log(this)
+AppData.prototype.start = function () {
+  
+console.log(this);
   this.budget = salaryAmount.value;
   this.validationSalaryAmount();
   this.getIncome();
@@ -213,7 +214,7 @@ AppData.prototype.showResult = function () {
 };
 
 AppData.prototype.reset = function () {
-
+  const _this = this;
   start.style.display = 'inline-block';
   cancel.style.display = 'none';
   inputText = document.querySelectorAll('input[type=text]');
@@ -262,20 +263,29 @@ AppData.prototype.reset = function () {
 };
 
 AppData.prototype.eventsListeners = function(){
+  console.log( 'event ', this);
   salaryAmount.addEventListener('input', this.validationSalaryAmount);
   periodSelect.addEventListener('change', this.eventRange);
   incomeBtnPlus.addEventListener('click', this.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', this.addExpensesBlock);
-  start.addEventListener('click', this.begin);
-  cancel.addEventListener('click', this.reset);
-
+  appData.validationSalaryAmount.bind(AppData)
+  
+  start.addEventListener('click', appData.start.bind(AppData));
+  cancel.addEventListener('click', appData.reset);
+    
 };
 
-
 const appData = new AppData();
+
+appData.prototype = Object.create(AppData.prototype);
+// appData.prototype.constructor = appData;
+
+// console.log(appData.reset instanceof AppData) ;
+
 console.dir(appData);
 appData.eventsListeners();
- 
+// cancel.addEventListener('click', appData.reset.bind(appData));
+// start.addEventListener('click', appData.start.bind(appData));
 
 // });
 
