@@ -270,17 +270,17 @@ AppData.prototype.eventsListeners = function(){
   expensesBtnPlus.addEventListener('click', this.addExpensesBlock);
   appData.validationSalaryAmount.bind(AppData)
   
-  start.addEventListener('click', appData.start.bind(AppData));
-  cancel.addEventListener('click', appData.reset);
+  start.addEventListener('click', appData.start.bind(appData));
+  cancel.addEventListener('click', appData.reset.bind(appData));
     
 };
 
 const appData = new AppData();
-
+Object.setPrototypeOf(appData, AppData.prototype)
 appData.prototype = Object.create(AppData.prototype);
-// appData.prototype.constructor = appData;
+appData.prototype.constructor = appData;
 
-// console.log(appData.reset instanceof AppData) ;
+console.log(appData.start instanceof AppData) ;
 
 console.dir(appData);
 appData.eventsListeners();
