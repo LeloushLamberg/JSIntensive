@@ -51,7 +51,7 @@ const AppData = function () {
 
 AppData.prototype.start = function () {
   
-console.log(this);
+
   this.budget = salaryAmount.value;
   this.validationSalaryAmount();
   this.getIncome();
@@ -78,7 +78,7 @@ AppData.prototype.addIncomeBlock = function () {
   incomeItems = document.querySelectorAll('.income-items');
 
   if (start.style.display === 'none') {
-    console.log(this);
+    
     this.disableInput();
   };
   if (incomeItems.length === 3) {
@@ -154,7 +154,7 @@ AppData.prototype.getAddIncome = function () {
 
 AppData.prototype.getExpensesMonth = function () {
   let swap = 0;
-  console.log(this);
+  
   for (let key in this.expenses) {
     swap = this.expenses[key];
     this.expensesMonth = this.expensesMonth + Number(swap);
@@ -189,6 +189,7 @@ AppData.prototype.disableInput = function () {
 
 AppData.prototype.eventRange = function (elem) {
   periodAmount.textContent = elem.target.value;
+  
   incomePeriodValue.value = this.budgetMonth * elem.target.value;
 };
  
@@ -265,7 +266,7 @@ AppData.prototype.reset = function () {
 AppData.prototype.eventsListeners = function(){
   
   salaryAmount.addEventListener('input', this.validationSalaryAmount);
-  periodSelect.addEventListener('change', this.eventRange);
+  periodSelect.addEventListener('change', this.eventRange.bind(appData));
   incomeBtnPlus.addEventListener('click', this.addIncomeBlock);
   expensesBtnPlus.addEventListener('click', this.addExpensesBlock);
   
@@ -276,8 +277,7 @@ AppData.prototype.eventsListeners = function(){
 
 const appData = new AppData();
 Object.setPrototypeOf(appData, AppData.prototype)
-appData.prototype = Object.create(AppData.prototype);
-appData.prototype.constructor = appData;
+
 
 appData.eventsListeners();
 
