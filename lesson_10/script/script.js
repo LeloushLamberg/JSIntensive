@@ -52,14 +52,14 @@ const AppData = function () {
 AppData.prototype.start = function () {
 console.log(this)
   this.budget = salaryAmount.value;
-  this.getExpensesMonth();
-  this.getExpenses();
-  this.getIncome();
-  this.getBudget();
-  this.getAddExpenses();
-  this.getAddIncome();
-  this.disableInput();
   this.validationSalaryAmount();
+  this.getIncome();
+  this.getAddIncome();
+  this.getExpenses();
+  this.getAddExpenses();
+  this.getExpensesMonth();
+  this.getBudget();
+  this.disableInput();
   this.showResult();
 
 
@@ -68,10 +68,10 @@ console.log(this)
 AppData.prototype.addIncomeBlock = function () {
   let cloneIncomeItem = incomeItems[0].cloneNode(true);
 
-  // for (let i = 0; i < cloneIncomeItem.children.length; i++) {
-  //   cloneIncomeItem.children[i].value = '';
-  //   cloneIncomeItem.children[i].setAttribute('autofocus', 'true');
-  // };
+  for (let i = 0; i < cloneIncomeItem.children.length; i++) {
+    cloneIncomeItem.children[i].value = '';
+    cloneIncomeItem.children[i].setAttribute('autofocus', 'true');
+  };
 
   incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
   incomeItems = document.querySelectorAll('.income-items');
@@ -88,10 +88,11 @@ AppData.prototype.addIncomeBlock = function () {
 AppData.prototype.addExpensesBlock = function () {
   let cloneExpensesItem = expensesItems[0].cloneNode(true);
 
-  // for (let i = 0; i < cloneExpensesItem.children.length; i++) {
-  //   cloneExpensesItem.children[i].value = '';
-  // };
-  // cloneExpensesItem.children[0].setAttribute('autofocus', 'true');
+  for (let i = 0; i < cloneExpensesItem.children.length; i++) {
+    cloneExpensesItem.children[i].value = '';
+    cloneExpensesItem.children[0].setAttribute('autofocus', 'true');
+  };
+ 
 
   expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
   expensesItems = document.querySelectorAll('.expenses-items');
@@ -152,6 +153,7 @@ AppData.prototype.getAddIncome = function () {
 
 AppData.prototype.getExpensesMonth = function () {
   let swap = 0;
+  console.log(this);
   for (let key in this.expenses) {
     swap = this.expenses[key];
     this.expensesMonth = this.expensesMonth + Number(swap);
@@ -184,14 +186,12 @@ AppData.prototype.disableInput = function () {
     });
 };
 
-AppData.prototype.changeRange = function () {
-
-  let eventRange = function (event) {
+AppData.prototype.eventRange = function (event) {
     let _this = this;
     periodAmount.textContent = event.target.value;
     incomePeriodValue.value = this.budgetMonth * event.target.value;
   };
-  periodSelect.addEventListener('change', eventRange);
+ 
 
 };
 
@@ -212,7 +212,7 @@ AppData.prototype.showResult = function () {
   additionalIncomeValue.value = this.addIncome.join(', ');
   targetMonthValue.value = Math.ceil(this.getTargetMonth());
   incomePeriodValue.value = this.calcPeriod();
-  console.log('депозит чек расчитать ', depositCheck)
+  
 };
 
 AppData.prototype.reset = function () {
@@ -264,15 +264,24 @@ AppData.prototype.reset = function () {
   expensesBtnPlus.style.display = 'block';
 };
 
+AppData.prototype.eventsListener = function(){
+  salaryAmount.addEventListener('input', this.validationSalaryAmount);
+  periodSelect.addEventListener('change', this.eventRange);
+}
+
+
 const appData = new AppData();
 console.dir(appData);
 
 
   appData.changeRange();
-  salaryAmount.addEventListener('input', appData.validationSalaryAmount.bind(appData));
   start.addEventListener('click', appData.start.bind(appData));
   incomeBtnPlus.addEventListener('click', appData.addIncomeBlock.bind(appData));
   expensesBtnPlus.addEventListener('click', appData.addExpensesBlock.bind(appData));
   cancel.addEventListener('click', appData.reset.bind(appData));
 
 // });
+
+// 2) Создать новый метод в классе, например eventsListeners.
+// 3) Перенести все действия, которые остались за классом внутрь него.
+// 4) Проверить чтобы все работало без ошибок
