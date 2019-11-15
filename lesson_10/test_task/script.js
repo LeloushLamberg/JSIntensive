@@ -9,40 +9,41 @@
     this.bg = options.bg;
     this.fontSize = options.fontSize;
     this.getSelector = function(){
-      let newDiv;
+      let newElt;
      
-      newDiv = document.createElement('div');
+      
       let hit = '';
       hit = this.selector;
      
       if (hit[0] === '.'){
         let cls = '';
-        
+        newElt = document.createElement('div');
         for (let i = 1; i < hit.length; i++){
           cls += hit[i];
         };
-        newDiv.className = cls;
+        newElt.className = cls;
         
       };
       if (hit[0] === '#'){
         let ind = '';
+        newElt = document.createElement('p');
         for (let i = 1; i < this.selector.length; i++){
           ind +=  this.selector[i];
         };
         
-        newDiv.id = ind;
+        newElt.id = ind;
        
       };
       let styleList = 'width: ' + this.width + '; height: ' + this.height + '; background: ' + this.bg + '; font-size: ' + this.fontSize + ';'
       
-      newDiv.style.cssText = styleList;
+      newElt.style.cssText = styleList;
       
-      return newDiv;
+      return newElt;
 
     };
   };
   
-  let swap = new DomElement('.begin', {width: '300px', height: '100px', bg: 'green', fontSize: '32px'});
+  let swap = new DomElement('#begin', {width: '300px', height: '100px', bg: 'green', fontSize: '32px'});
   
   let begin = swap.getSelector();
   
