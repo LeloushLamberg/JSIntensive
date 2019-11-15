@@ -49,7 +49,7 @@ const AppData = function () {
   this.expensesMonth = 0;
 };
 
-AppData.prototype.start = function () {
+AppData.prototype.begin = function () {
 console.log(this)
   this.budget = salaryAmount.value;
   this.validationSalaryAmount();
@@ -186,14 +186,11 @@ AppData.prototype.disableInput = function () {
     });
 };
 
-AppData.prototype.eventRange = function (event) {
-    let _this = this;
-    periodAmount.textContent = event.target.value;
-    incomePeriodValue.value = this.budgetMonth * event.target.value;
-  };
- 
-
+AppData.prototype.eventRange = function (elem) {
+  periodAmount.textContent = elem.target.value;
+  incomePeriodValue.value = this.budgetMonth * elem.target.value;
 };
+ 
 
 AppData.prototype.validationSalaryAmount = function () {
   if (salaryAmount.value === '' || isNaN(salaryAmount.value)) {
@@ -264,24 +261,23 @@ AppData.prototype.reset = function () {
   expensesBtnPlus.style.display = 'block';
 };
 
-AppData.prototype.eventsListener = function(){
+AppData.prototype.eventsListeners = function(){
   salaryAmount.addEventListener('input', this.validationSalaryAmount);
   periodSelect.addEventListener('change', this.eventRange);
-}
+  incomeBtnPlus.addEventListener('click', this.addIncomeBlock);
+  expensesBtnPlus.addEventListener('click', this.addExpensesBlock);
+  start.addEventListener('click', this.begin);
+  cancel.addEventListener('click', this.reset);
+
+};
 
 
 const appData = new AppData();
 console.dir(appData);
-
-
-  appData.changeRange();
-  start.addEventListener('click', appData.start.bind(appData));
-  incomeBtnPlus.addEventListener('click', appData.addIncomeBlock.bind(appData));
-  expensesBtnPlus.addEventListener('click', appData.addExpensesBlock.bind(appData));
-  cancel.addEventListener('click', appData.reset.bind(appData));
+appData.eventsListeners();
+ 
 
 // });
 
-// 2) Создать новый метод в классе, например eventsListeners.
-// 3) Перенести все действия, которые остались за классом внутрь него.
+
 // 4) Проверить чтобы все работало без ошибок
