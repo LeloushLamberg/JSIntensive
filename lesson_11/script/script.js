@@ -1,39 +1,39 @@
-document.addEventListener('DOMContentLoaded', function () {
+// document.addEventListener('DOMContentLoaded', function () {
 'use strict';
-let start = document.querySelector('#start'),
+const start = document.querySelector('#start'),
   cancel = document.querySelector('#cancel'),
 
   incomeBtnPlus = document.querySelector('.income >.btn_plus'),
   incomeTitle = document.querySelector('.income-title'),
-  incomeItems = document.querySelectorAll('.income-items'),
   incomePeriodValue = document.querySelector('.income_period-value'),
   additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
   additionalIncomeValue = document.querySelector('.additional_income-value'),
-
+  
   expensesBtnPlus = document.querySelector('.expenses >.btn_plus'),
   expensesMonthValue = document.querySelector('.expenses_month-value'),
   expensesTitle = document.querySelector('.expenses-title'),
-  expensesItems = document.querySelectorAll('.expenses-items'),
   additionalExpensesValue = document.querySelector('.additional_expenses-value'),
   additionalExpensesItem = document.querySelector('.additional_expenses-item'),
-
+  
   budgetMonthValue = document.querySelector('.budget_month-value'),
   budgetDayValue = document.querySelector('.budget_day-value'),
-
+  
   targetMonthValue = document.querySelector('.target_month-value'),
   targetAmount = document.querySelector('.target-amount'),
-
+  
   salaryAmount = document.querySelector('.salary-amount'),
-
+  
   depositAmount = document.querySelector('.deposit-amount'),
   depositPercent = document.querySelector('.deposit-percent'),
   depositCheck = document.querySelector('#deposit-check'),
-
+  
   periodSelect = document.querySelector('.period-select'),
-  periodAmount = document.querySelector('.period-amount'),
-
-  inputText = document.querySelectorAll('input[type=text]');
-
+  periodAmount = document.querySelector('.period-amount');
+  
+  let inputText = document.querySelectorAll('input[type=text]'),
+  expensesItems = document.querySelectorAll('.expenses-items'),
+  incomeItems = document.querySelectorAll('.income-items');
+  
 const AppData = function () {
   this.budget = 0;
   this.budgetDay = 0;
@@ -109,8 +109,8 @@ AppData.prototype.addExpensesBlock = function () {
 AppData.prototype.getIncome = function () {
   let _this = this;
   incomeItems.forEach(function (item) {
-    let itemIncome = item.querySelector('.income-title').value;
-    let cashIncome = +item.querySelector('.income-amount').value;
+    const itemIncome = item.querySelector('.income-title').value;
+    const cashIncome = +item.querySelector('.income-amount').value;
     if (itemIncome !== '' && cashIncome !== '' && !isNaN(cashIncome)) {
       _this.income[itemIncome] = cashIncome;
     };
@@ -123,8 +123,8 @@ AppData.prototype.getIncome = function () {
 AppData.prototype.getExpenses = function () {
   const _this = this;
   expensesItems.forEach(function (item) {
-    let itemExpenses = item.querySelector('.expenses-title').value;
-    let cashExpenses = item.querySelector('.expenses-amount').value;
+    const itemExpenses = item.querySelector('.expenses-title').value;
+    const cashExpenses = item.querySelector('.expenses-amount').value;
     if (itemExpenses !== '' && cashExpenses !== '' && !isNaN(cashExpenses)) {
       _this.expenses[itemExpenses] = cashExpenses;
     };
@@ -132,8 +132,8 @@ AppData.prototype.getExpenses = function () {
 };
 
 AppData.prototype.getAddExpenses = function () {
-  let _this = this;
-  let addExpenses = additionalExpensesItem.value.split(',');
+  const _this = this;
+  const addExpenses = additionalExpensesItem.value.split(',');
   addExpenses.forEach(function (item) {
     item = item.trim();
     if (item !== '') {
@@ -143,9 +143,9 @@ AppData.prototype.getAddExpenses = function () {
 };
 
 AppData.prototype.getAddIncome = function () {
-  let _this = this;
+  const _this = this;
   additionalIncomeItem.forEach(function (item) {
-    let itemValue = item.value.trim();
+    const itemValue = item.value.trim();
     if (itemValue !== '') {
       _this.addIncome.push(itemValue);
     };
@@ -281,12 +281,11 @@ Object.setPrototypeOf(appData, AppData.prototype)
 
 appData.eventsListeners();
 
-});
+// });
 
 
 // 1) Привести проект в соответствии с новым стандартом.
 // 2) Для выполнения данного пункта необходимо посмотреть дополнительное видео!
 // Мы сделали 1 универсальный метод getExpInc на основе 2 предыдущих(getExpenses/getIncome), но у нас остались еще 2 пары методов, которые дублируют один и тот же код (addExpensesBlock/addIncomeBlock и getAddIncome/getAddExpenses).
 // Нужно создать 2 универсальных метода, которые будут принимать параметры, в зависимости от которых будут происходить нужные нам действия. 
-// 3) Переменные, существующие только с неизменяемым параметром, объявить через const.
 // 4) Добавить папку с уроком на свой GitHub
