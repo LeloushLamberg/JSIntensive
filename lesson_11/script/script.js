@@ -52,8 +52,8 @@ const AppData = function () {
 AppData.prototype.start = function () {
   
 
-  this.budget = salaryAmount.value;
   this.validationSalaryAmount();
+  this.budget = salaryAmount.value;
   this.getIncome();
   this.getAddIncome();
   this.getExpenses();
@@ -196,9 +196,9 @@ AppData.prototype.eventRange = function (elem) {
 
 AppData.prototype.validationSalaryAmount = function () {
   if (salaryAmount.value === '' || isNaN(salaryAmount.value)) {
-    start.setAttribute('disabled', 'disabled')
+    start.disabled = true;
   } else {
-    start.removeAttribute('disabled', 'disabled');
+    start.disabled = false;
   };
 };
 
@@ -280,10 +280,9 @@ Object.setPrototypeOf(appData, AppData.prototype)
 
 
 appData.eventsListeners();
-
+start.disabled = true;
 // });
 
-// 0) Найти ошибку, по которой расчёт идёт при не заполненном поле доход после сброса и в первый раз.
 // 1) Привести проект в соответствии с новым стандартом.
 // 2) Для выполнения данного пункта необходимо посмотреть дополнительное видео!
 // Мы сделали 1 универсальный метод getExpInc на основе 2 предыдущих(getExpenses/getIncome), но у нас остались еще 2 пары методов, которые дублируют один и тот же код (addExpensesBlock/addIncomeBlock и getAddIncome/getAddExpenses).
