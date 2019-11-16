@@ -55,7 +55,7 @@ AppData.prototype.start = function () {
 
   this.validationSalaryAmount();
   this.budget = salaryAmount.value;
-  this.getDeposit();
+  this.getInfoDeposit();
   this.getIncome();
   this.getAddIncome();
   this.getExpenses();
@@ -269,25 +269,23 @@ AppData.prototype.reset = function () {
   expensesBtnPlus.style.display = `block`;
 };
 
-AppData.prototype.eventsListeners = function () {
-
-  salaryAmount.addEventListener(`input`, this.validationSalaryAmount);
-  periodSelect.addEventListener(`change`, this.eventRange.bind(appData));
-  depositCheck.addEventListener(`change`, this.getDeposit.bind(appData));
-  incomeBtnPlus.addEventListener(`click`, this.addIncomeBlock.bind(appData));
-  expensesBtnPlus.addEventListener(`click`, this.addExpensesBlock.bind(appData));
-  depositBank.addEventListener(`change`, this.choiceBank.bind(appData));
-  start.addEventListener(`click`, appData.start.bind(appData));
-  cancel.addEventListener(`click`, appData.reset.bind(appData));
-
-};
 
 AppData.prototype.getDeposit = function () {
   if (depositCheck.checked) {
     this.deposit = true;
     depositBank.style.display = `inline-block`;
     depositAmount.style.display = `inline-block`;
-    depositPercent.style.display = `inline-block`;
+    
+    depositBank.addEventListener(`change`, function () {
+      let selectIndex = depositBank[this.options.selectedIndex].value
+      if (selectIndex !== `other`) {
+        depositPercent.style.display = `none`;
+        depositPercent.value = selectIndex
+      } else {
+        depositPercent.value = ``;
+        depositPercent.style.display = `inline-block`;
+      };
+    });
   } else {
     this.deposit = false;
     depositBank.style.display = `none`;
@@ -296,21 +294,27 @@ AppData.prototype.getDeposit = function () {
     depositAmount.value = ``;
   };
 };
-AppData.prototype.choiceBank = function () {
-  console.dir(depositBank);
-  let accumulation = 0;
-  if (depositBank[depositBank.options.selectedIndex].value !== `other`) {
-    depositPercent.value = `${depositBank[depositBank.options.selectedIndex].value * 100}%`;
-    depositPercent.disabled = true;
-    accumulation = +depositAmount.value * depositBank[depositBank.options.selectedIndex].value / 12;
-  } else {
-    depositPercent.value = ``;
-    depositPercent.disabled = false;
-    accumulation = +depositAmount.value * depositPercent.value / 12;
+
+AppData.prototype.eventsListeners = function () {
+
+  salaryAmount.addEventListener(`input`, this.validationSalaryAmount);
+  periodSelect.addEventListener(`change`, this.eventRange.bind(appData));
+  depositCheck.addEventListener(`change`, this.getDeposit.bind(appData));
+  incomeBtnPlus.addEventListener(`click`, this.addIncomeBlock.bind(appData));
+  expensesBtnPlus.addEventListener(`click`, this.addExpensesBlock.bind(appData));
+  depositCheck.addEventListener(`change`, this.getDeposit.bind(appData));
+  start.addEventListener(`click`, appData.start.bind(appData));
+  cancel.addEventListener(`click`, appData.reset.bind(appData));
+
+};
+
+AppData.prototype.getInfoDeposit = function () {
+  if (this.deposit){
+
+    this.percentDeposit = depositPercent.value;
+    this.moneyDeposit = depositAmount.value;
   };
-  
-  console.log(accumulation);
-  return accumulation;
+
 };
 
 
