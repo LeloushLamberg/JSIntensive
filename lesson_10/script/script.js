@@ -1,4 +1,4 @@
-// document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 'use strict';
 let start = document.querySelector('#start'),
   cancel = document.querySelector('#cancel'),
@@ -281,7 +281,4 @@ Object.setPrototypeOf(appData, AppData.prototype)
 
 appData.eventsListeners();
 
-// });
-
-
-// 4) Проверить чтобы все работало без ошибок
+});
