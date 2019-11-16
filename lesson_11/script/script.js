@@ -64,7 +64,7 @@ AppData.prototype.start = function () {
   this.getBudget();
   this.disableInput();
   this.showResult();
-  console.dir(this.budgetMonth);
+ 
 
 };
 
@@ -170,8 +170,8 @@ AppData.prototype.getExpensesMonth = function () {
 };
 
 AppData.prototype.getBudget = function () {
-  console.log(this.getDeposit)
-  this.budgetMonth = +this.budget + +this.incomeMonth + this.getDeposit - +this.expensesMonth;
+ 
+  this.budgetMonth = +this.budget + +this.incomeMonth - +this.expensesMonth + (depositAmount.value * depositPercent.value) / 12;
   this.budgetDay = Math.floor(this.budgetMonth / 30);
 };
 
@@ -196,7 +196,7 @@ AppData.prototype.disableInput = function () {
     });
 };
 
-AppData.prototype.eventRange = (elem) => {
+AppData.prototype.eventRange = function (elem) {
   periodAmount.textContent = elem.target.value;
 
   incomePeriodValue.value = this.budgetMonth * elem.target.value;
@@ -277,12 +277,14 @@ AppData.prototype.getDeposit = function () {
     depositAmount.style.display = `inline-block`;
     
     depositBank.addEventListener(`change`, function () {
-      let selectIndex = depositBank[this.options.selectedIndex].value
+      let selectIndex = depositBank[this.options.selectedIndex].value;
       if (selectIndex !== `other`) {
         depositPercent.style.display = `none`;
-        depositPercent.value = selectIndex
+        depositPercent.value = selectIndex;
+        console.log(depositPercent.value);
       } else {
         depositPercent.value = ``;
+        depositPercent.disabled = false;
         depositPercent.style.display = `inline-block`;
       };
     });
@@ -293,6 +295,16 @@ AppData.prototype.getDeposit = function () {
     depositPercent.style.display = `none`;
     depositAmount.value = ``;
   };
+};
+
+
+AppData.prototype.getInfoDeposit = function () {
+  if (this.percentDeposit){
+
+    this.percentDeposit = depositPercent.value;
+    this.moneyDeposit = depositAmount.value;
+  };
+
 };
 
 AppData.prototype.eventsListeners = function () {
@@ -308,20 +320,8 @@ AppData.prototype.eventsListeners = function () {
 
 };
 
-AppData.prototype.getInfoDeposit = function () {
-  if (this.deposit){
-
-    this.percentDeposit = depositPercent.value;
-    this.moneyDeposit = depositAmount.value;
-  };
-
-};
-
-
-
 const appData = new AppData();
 Object.setPrototypeOf(appData, AppData.prototype)
-
 
 appData.eventsListeners();
 start.disabled = true;
