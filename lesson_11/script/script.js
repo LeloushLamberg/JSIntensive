@@ -108,7 +108,7 @@ AppData.prototype.addExpensesBlock = function () {
 
 AppData.prototype.getIncome = function () {
   let _this = this;
-  incomeItems.forEach(function (item) {
+  incomeItems.forEach((item) => {
     const itemIncome = item.querySelector('.income-title').value;
     const cashIncome = +item.querySelector('.income-amount').value;
     if (itemIncome !== '' && cashIncome !== '' && !isNaN(cashIncome)) {
@@ -195,9 +195,7 @@ AppData.prototype.eventRange = function (elem) {
  
 
 AppData.prototype.validationSalaryAmount = function () {
-  if (salaryAmount.value === '' || isNaN(salaryAmount.value)) {
-    start.disabled = true;
-  } else {
+  if (salaryAmount.value !== '' || !isNaN(salaryAmount.value)) {
     start.disabled = false;
   };
 };
@@ -215,6 +213,7 @@ AppData.prototype.showResult = function () {
 };
 
 AppData.prototype.reset = function () {
+  start.disabled = true;
   const _this = this;
   start.style.display = 'inline-block';
   cancel.style.display = 'none';
