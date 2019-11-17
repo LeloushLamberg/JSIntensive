@@ -51,12 +51,9 @@ const AppData = function () {
 };
 
 AppData.prototype.start = function () {
-
-
   this.validationSalaryAmount();
   this.budget = salaryAmount.value;
   this.getInfoDeposit();
-  
   this.getAddIncome();
   this.getExpInc();
   this.getAddExpenses();
@@ -64,46 +61,6 @@ AppData.prototype.start = function () {
   this.getBudget();
   this.disableInput();
   this.showResult();
- 
-
-};
-
-AppData.prototype.addIncomeBlock = function () {
-  console.log(this);
-  const _this = this;
-  let cloneIncomeItem = incomeItems[0].cloneNode(true);
-
-  for (let i = 0; i < cloneIncomeItem.children.length; i++) {
-    cloneIncomeItem.children[i].value = ``;
-    cloneIncomeItem.children[i].setAttribute(`autofocus`, `true`);
-  };
-
-  incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
-  incomeItems = document.querySelectorAll(`.income-items`);
-
-  if (start.style.display === `none`) {
-
-    this.disableInput();
-  };
-  if (incomeItems.length === 3) {
-    incomeBtnPlus.style.display = `none`;
-  };
-};
-
-AppData.prototype.addExpensesBlock = function () {
-
-  
-
-  expensesItems[0].parentNode.insertBefore(cloneExpensesItem, );
-  elementItems = document.querySelectorAll(`.${enteres}-items`);
-
-  if (start.style.display === `none`) {
-
-    _this.disableInput();
-  };
-  if (expensesItems.length === 3) {
-    expensesBtnPlus.style.display = `none`;
-  };
 };
 
 AppData.prototype.getBlockPlus = function (event){
@@ -120,13 +77,25 @@ AppData.prototype.getBlockPlus = function (event){
     let btnPlus = document.querySelector(`.${enteres} >.btn_plus`);
     console.log(btnPlus);
     itemsList[0].parentNode.insertBefore(cloneItemBlock, btnPlus);
+
+    itemsList = document.querySelectorAll(`.${enteres}-items`);
+
+    if (start.style.display === `none`) {
+  
+      this.disableInput();
+    };
+    if (itemsList.length === 3) {
+      btnPlus.style.display = `none`;
+    };
+
+
     };
   if(event.target === incomeBtnPlus){
     incomeItems.forEach(count);
   } else {
     expensesItems.forEach(count); 
   };
-
+  
 };
 
 AppData.prototype.getExpInc = function (){
