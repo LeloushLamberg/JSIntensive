@@ -106,25 +106,26 @@ AppData.prototype.addExpensesBlock = function () {
   };
 };
 
-AppData.prototype.getBlockPlus = function (){
+AppData.prototype.getBlockPlus = function (event){
+  console.log(event);
   const _this = this;
-  // const cloneItem = 
   const count = (item) => {
     const enteres = item.className.split(`-`)[0];
     itemsList = document.querySelectorAll(`.${enteres}-items`);
     cloneItemBlock = itemsList[0].cloneNode(true);
     for (let i = 0; i < cloneItemBlock.children.length; i++) {
-      console.log( cloneItemBlock);
       cloneItemBlock.children[i].value = ``;
       cloneItemBlock.children[0].setAttribute(`autofocus`, `true`);
     };
     let btnPlus = document.querySelector(`.${enteres} >.btn_plus`);
     console.log(btnPlus);
-    expensesItems[0].parentNode.insertBefore(cloneItemBlock, btnPlus);
+    itemsList[0].parentNode.insertBefore(cloneItemBlock, btnPlus);
     };
-  
+  if(event.target === incomeBtnPlus){
     incomeItems.forEach(count);
+  } else {
     expensesItems.forEach(count); 
+  };
 
 };
 
