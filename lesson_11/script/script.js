@@ -56,9 +56,9 @@ AppData.prototype.start = function () {
   this.validationSalaryAmount();
   this.budget = salaryAmount.value;
   this.getInfoDeposit();
-  this.getIncome();
+  
   this.getAddIncome();
-  this.getExpenses();
+  this.getExpInc();
   this.getAddExpenses();
   this.getExpensesMonth();
   this.getBudget();
@@ -122,13 +122,11 @@ AppData.prototype.getIncome = function () {
       _this.income[itemIncome] = cashIncome;
     };
   });
-  for (let key in this.income) {
-    this.incomeMonth += +this.income[key];
-  };
+ 
 };
 
 AppData.prototype.getExpenses = function () {
-  const _this = this;
+ 
   expensesItems.forEach(function (item) {
     const itemExpenses = item.querySelector(`.expenses-title`).value;
     const cashExpenses = item.querySelector(`.expenses-amount`).value;
@@ -137,6 +135,26 @@ AppData.prototype.getExpenses = function () {
     };
   });
 };
+
+AppData.prototype.getExpInc = function (){
+  const _this = this;
+  const count = (item) => {
+    const enteres = item.className.split(`-`)[0];
+    console.log(item.className.split(`-`)[0]);
+    const itemTitle = item.querySelector(`.${enteres}-title`).value;
+    const itemAmount = item.querySelector(`.${enteres}-amount`).value;
+    if (itemTitle !== `` && itemAmount !== `` && !isNaN(itemAmount)) {
+      _this[enteres][itemTitle] = itemAmount;
+    };  
+  };
+
+  incomeItems.forEach(count);
+  expensesItems.forEach(count);  
+  for (const key in this.income) {
+    this.incomeMonth += +this.income[key];
+  };
+};
+
 
 AppData.prototype.getAddExpenses = function () {
   const _this = this;
@@ -164,7 +182,7 @@ AppData.prototype.getExpensesMonth = function () {
 
   for (let key in this.expenses) {
     swap = this.expenses[key];
-    this.expensesMonth = this.expensesMonth + Number(swap);
+    this.expensesMonth = +this.expensesMonth + +swap;
   };
 
 };
