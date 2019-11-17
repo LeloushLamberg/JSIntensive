@@ -180,10 +180,10 @@ AppData.prototype.calcPeriod = function () {
 AppData.prototype.disableInput = function () {
   start.style.display = 'none';
   cancel.style.display = 'inline-block';
-  depositCheck.setAttribute('disabled', 'disabled');
+  depositCheck.disabled = true;
   inputText = document.querySelectorAll('input[type=text]'),
     inputText.forEach(function (item) {
-      item.setAttribute('disabled', 'disabled');
+      item.disabled = true;
     });
 };
 
