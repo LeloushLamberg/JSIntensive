@@ -111,7 +111,7 @@ AppData.prototype.getExpInc = function (){
   for (const key in this.income) {
     this.incomeMonth += +this.income[key];
   };
-  console.dir(appData.income);
+
 };
 
 AppData.prototype.getAddExpenses = function () {
@@ -205,8 +205,10 @@ AppData.prototype.reset = function () {
     item.removeAttribute(`disabled`);
     item.value = ``;
   });
-
+  depositBank.style.display = `none`;
+  depositAmount.style.display = `none`;
   depositCheck.checked = false;
+  depositPercent.style.display = `none`;
   budgetMonthValue.value = ``;
   budgetDayValue.value = ``;
   expensesMonthValue.value = ``;
@@ -257,7 +259,7 @@ AppData.prototype.getDeposit = function () {
       if (selectIndex !== `other`) {
         depositPercent.style.display = `none`;
         depositPercent.value = selectIndex;
-        console.log(depositPercent.value);
+       
       } else {
         depositPercent.value = ``;
         depositPercent.disabled = false;
