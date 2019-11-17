@@ -109,7 +109,7 @@ AppData.prototype.addExpensesBlock = function () {
 AppData.prototype.getIncome = function () {
   let _this = this;
   incomeItems.forEach(function (item) {
-    let itemIncome = item.querySelector('.income-title').value;
+    let itemIncome = +item.querySelector('.income-title').value;
     let cashIncome = +item.querySelector('.income-amount').value;
     if (itemIncome !== '' && cashIncome !== '' && !isNaN(cashIncome)) {
       _this.income[itemIncome] = cashIncome;

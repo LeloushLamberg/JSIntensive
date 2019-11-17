@@ -55,16 +55,16 @@ AppData.prototype.start = function () {
   this.budget = salaryAmount.value;
   this.getInfoDeposit();
   this.getAddIncome();
-  this.getExpInc();
   this.getAddExpenses();
   this.getExpensesMonth();
+  this.getExpInc();
   this.getBudget();
   this.disableInput();
   this.showResult();
 };
 
 AppData.prototype.getBlockPlus = function (event){
-  console.log(event);
+
   const _this = this;
   const count = (item) => {
     const enteres = item.className.split(`-`)[0];
@@ -75,21 +75,18 @@ AppData.prototype.getBlockPlus = function (event){
       cloneItemBlock.children[0].setAttribute(`autofocus`, `true`);
     };
     let btnPlus = document.querySelector(`.${enteres} >.btn_plus`);
-    console.log(btnPlus);
+   
     itemsList[0].parentNode.insertBefore(cloneItemBlock, btnPlus);
 
     itemsList = document.querySelectorAll(`.${enteres}-items`);
 
     if (start.style.display === `none`) {
-  
       this.disableInput();
     };
     if (itemsList.length === 3) {
       btnPlus.style.display = `none`;
     };
-
-
-    };
+  };
   if(event.target === incomeBtnPlus){
     incomeItems.forEach(count);
   } else {
@@ -104,7 +101,7 @@ AppData.prototype.getExpInc = function (){
     const enteres = item.className.split(`-`)[0];
     const itemTitle = item.querySelector(`.${enteres}-title`).value;
     const itemAmount = item.querySelector(`.${enteres}-amount`).value;
-    if (itemTitle !== `` && itemAmount !== `` && !isNaN(itemAmount)) {
+    if (itemTitle[item] !== `` && itemAmount[item] !== `` && !isNaN(itemAmount)) {
       _this[enteres][itemTitle] = itemAmount;
     };  
   };
@@ -114,6 +111,7 @@ AppData.prototype.getExpInc = function (){
   for (const key in this.income) {
     this.incomeMonth += +this.income[key];
   };
+  console.dir(appData.income);
 };
 
 AppData.prototype.getAddExpenses = function () {
