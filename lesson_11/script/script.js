@@ -93,16 +93,9 @@ AppData.prototype.addIncomeBlock = function () {
 AppData.prototype.addExpensesBlock = function () {
 
   
-  let cloneExpensesItem = expensesItems[0].cloneNode(true);
 
-  for (let i = 0; i < cloneExpensesItem.children.length; i++) {
-    cloneExpensesItem.children[i].value = ``;
-    cloneExpensesItem.children[0].setAttribute(`autofocus`, `true`);
-  };
-
-
-  expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
-  expensesItems = document.querySelectorAll(`.expenses-items`);
+  expensesItems[0].parentNode.insertBefore(cloneExpensesItem, );
+  elementItems = document.querySelectorAll(`.${enteres}-items`);
 
   if (start.style.display === `none`) {
 
@@ -121,14 +114,18 @@ AppData.prototype.getBlockPlus = function (){
     itemsList = document.querySelectorAll(`.${enteres}-items`);
     cloneItemBlock = itemsList[0].cloneNode(true);
     for (let i = 0; i < cloneItemBlock.children.length; i++) {
+      console.log( cloneItemBlock);
       cloneItemBlock.children[i].value = ``;
       cloneItemBlock.children[0].setAttribute(`autofocus`, `true`);
     };
-    console.log(cloneItemBlock);
+    let btnPlus = document.querySelector(`.${enteres} >.btn_plus`);
+    console.log(btnPlus);
+    expensesItems[0].parentNode.insertBefore(cloneItemBlock, btnPlus);
+    };
   
-  };
-  incomeItems.forEach(count);
-  expensesItems.forEach(count);  
+    incomeItems.forEach(count);
+    expensesItems.forEach(count); 
+
 };
 
 AppData.prototype.getExpInc = function (){
