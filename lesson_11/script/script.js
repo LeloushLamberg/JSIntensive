@@ -1,5 +1,5 @@
 // document.addEventListener(`DOMContentLoaded`, function () {
-`use strict`;
+'use strict';
 const start = document.querySelector(`#start`),
   cancel = document.querySelector(`#cancel`),
 
@@ -54,7 +54,13 @@ AppData.prototype.start = function () {
   this.validationSalaryAmount();
   this.budget = salaryAmount.value;
   this.getInfoDeposit();
+
   this.getAddIncome();
+
+  this.getIncome();
+  this.getAddIncome();
+  this.getExpenses();
+
   this.getAddExpenses();
   this.getExpensesMonth();
   this.getExpInc();
@@ -83,8 +89,24 @@ AppData.prototype.getBlockPlus = function (event){
     if (start.style.display === `none`) {
       this.disableInput();
     };
+
     if (itemsList.length === 3) {
       btnPlus.style.display = `none`;
+
+  });
+  for (let key in this.income) {
+    this.incomeMonth += +this.income[key];
+  };
+};
+
+AppData.prototype.getExpenses = function () {
+  const _this = this;
+  expensesItems.forEach(function (item) {
+    const itemExpenses = item.querySelector(`.expenses-title`).value;
+    const cashExpenses = item.querySelector(`.expenses-amount`).value;
+    if (itemExpenses !== `` && cashExpenses !== `` && !isNaN(cashExpenses)) {
+      _this.expenses[itemExpenses] = cashExpenses;
+
     };
   };
   if(event.target === incomeBtnPlus){
@@ -94,6 +116,7 @@ AppData.prototype.getBlockPlus = function (event){
   };
   
 };
+
 
 AppData.prototype.getExpInc = function (){
   const _this = this;
@@ -113,6 +136,7 @@ AppData.prototype.getExpInc = function (){
   };
 
 };
+
 
 AppData.prototype.getAddExpenses = function () {
   const _this = this;
@@ -140,7 +164,7 @@ AppData.prototype.getExpensesMonth = function () {
 
   for (let key in this.expenses) {
     swap = this.expenses[key];
-    this.expensesMonth = +this.expensesMonth + +swap;
+    this.expensesMonth = this.expensesMonth + Number(swap);
   };
 
 };
