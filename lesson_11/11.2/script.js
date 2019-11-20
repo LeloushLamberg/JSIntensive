@@ -210,6 +210,7 @@ class AppData {
   
   calcPeriod () {
     return this.budgetMonth * Number(periodSelect.value);
+    console.log(appData.budgetMonth, `3`);
   }
   
   disableInput () {
@@ -226,6 +227,7 @@ class AppData {
     periodAmount.textContent = elem.target.value;
     
     incomePeriodValue.value = this.budgetMonth * elem.target.value;
+    console.log(appData.budgetMonth, `2`);
   };
   
   start () {
@@ -243,6 +245,7 @@ class AppData {
     this.getBudget();
     this.disableInput();
     this.showResult();
+    console.log(appData.budgetMonth, `1`);
   }
   
   reset () {
@@ -308,6 +311,7 @@ cancel.addEventListener(`click`, () => {
   appData.reset();
   appData = null;
   appData = new AppData();
+  console.dir(appData)
 });
 
 appData.eventsListeners();
