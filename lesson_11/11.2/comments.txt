@@ -1,0 +1,80 @@
+
+// 4) Добавить папку с уроком на свой GitHub
+// не надо использовать 'магическое' приведение String к Number с помощью +
+// например this[enteres][itemTitle] = +itemAmount;
+// лучше    this[enteres][itemTitle] = Number(itemAmount);
+// Object.setPrototypeOf(appData, AppData.prototype)
+// this.calcIncome();
+// this.calcExpenses();
+
+// addIncomeBlock () {
+  //   let cloneIncomeItem = incomeItems[0].cloneNode(true);
+  
+  //   for (let i = 0; i < cloneIncomeItem.children.length; i++) {
+    //     cloneIncomeItem.children[i].value = '';
+    //     cloneIncomeItem.children[i].setAttribute('autofocus', 'true');
+    //   };
+    
+    //   incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomeBtnPlus);
+    //   incomeItems = document.querySelectorAll('.income-items');
+    
+    //   if (start.style.display === 'none') {
+      
+      //     this.disableInput();
+      //   };
+      //   if (incomeItems.length === 3) {
+        //     incomeBtnPlus.style.display = 'none';
+        //   };
+        // }
+        
+        // addExpensesBlock () {
+          //   let cloneExpensesItem = expensesItems[0].cloneNode(true);
+          
+          //   for (let i = 0; i < cloneExpensesItem.children.length; i++) {
+            //     cloneExpensesItem.children[i].value = '';
+            //     cloneExpensesItem.children[0].setAttribute('autofocus', 'true');
+            //   };
+            
+            //   expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesBtnPlus);
+            //   expensesItems = document.querySelectorAll('.expenses-items');
+            
+            //   if (start.style.display === 'none') {
+              //     this.disableInput();
+              //   };
+              //   if (expensesItems.length === 3) {
+                //     expensesBtnPlus.style.display = 'none';
+                //   };
+                // }
+                
+                // calcIncome () {
+                  //   let _this = this;
+                  //   incomeItems.forEach( item => {
+                    //     let itemIncome = item.querySelector('.income-title').value;
+                    //     let cashIncome = item.querySelector('.income-amount').value;
+                    //     if (itemIncome !== '' && cashIncome !== '' && !isNaN(cashIncome)) {
+                      //       _this.income[itemIncome] = cashIncome;
+                      //     };
+                      //   });
+                      //   for (let key in this.income) {
+                        //     this.incomeMonth += this.income[key];
+                        //   };
+                        // };
+                        
+                        // calcExpenses () {
+                          //   const _this = this;
+                          //   expensesItems.forEach( item => {
+                            //     let itemExpenses = item.querySelector('.expenses-title').value;
+                            //     let cashExpenses = item.querySelector('.expenses-amount').value;
+                            //     if (itemExpenses !== '' && cashExpenses !== '' && !isNaN(cashExpenses)) {
+                              //       _this.expenses[itemExpenses] = cashExpenses;
+                              //     };
+                              //   });
+                              // };
+                              // let swap = 0;
+                              // for (let key in this.expenses) {
+                                //   swap = this.expenses[key];
+                                //   this.expensesMonth = this.expensesMonth + +swap;
+                      // };
+                      // incomeBtnPlus.addEventListener(`click`, this.addIncomeBlock.bind(appData));
+                                
+                      // expensesBtnPlus.addEventListener(`click`, this.addExpensesBlock.bind(appData));
