@@ -309,6 +309,7 @@ class AppData {
 let appData = new AppData();
 
 start.addEventListener(`click`, () => appData.start());
+
 cancel.addEventListener(`click`, () => {
   appData.reset();
   appData = null;
