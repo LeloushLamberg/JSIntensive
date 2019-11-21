@@ -1,4 +1,4 @@
-// document.addEventListener(`DOMContentLoaded`, function () {
+document.addEventListener(`DOMContentLoaded`, function () {
 'use strict';
 const start = document.querySelector(`#start`),
   cancel = document.querySelector(`#cancel`),
@@ -317,10 +317,4 @@ Object.setPrototypeOf(appData, AppData.prototype)
 
 appData.eventsListeners();
 start.disabled = true;
-// });
-
-
-// 2) Для выполнения данного пункта необходимо посмотреть дополнительное видео!
-// Мы сделали 1 универсальный метод getExpInc на основе 2 предыдущих(getExpenses/getIncome), но у нас остались еще 2 пары методов, которые дублируют один и тот же код (addExpensesBlock/addIncomeBlock и getAddIncome/getAddExpenses).
-// Нужно создать 2 универсальных метода, которые будут принимать параметры, в зависимости от которых будут происходить нужные нам действия. 
-// 4) Добавить папку с уроком на свой GitHub
+});
