@@ -73,7 +73,9 @@ class AppData {
           depositPercent.value = ``;
           depositPercent.disabled = false;
           depositPercent.style.display = `inline-block`;
+          +depositPercent.value;
         };
+        +depositAmount.value;
       });
     } else {
       this.deposit = false;
@@ -133,7 +135,7 @@ class AppData {
         cloneItemBlock.children[0].setAttribute('autofocus', true);
       };
       
-      console.log({ enteres })
+      
       
       const btnPlus = document.querySelector(`.${enteres} > .btn_plus`);
       
@@ -163,7 +165,7 @@ class AppData {
       const itemAmount = item.querySelector(`.${enteres}-amount`).value;
       
       if (itemTitle[item] !== '' && itemAmount[item] !== '' && !isNaN(itemAmount)) {
-        console.log({ [`this[${enteres}][${itemTitle}]`]: itemAmount });
+        
         this[enteres][itemTitle] = Number(itemAmount);
       };
     };
@@ -200,7 +202,7 @@ class AppData {
   }
   
   getBudget () {
-    this.budgetMonth = Number(this.budget) + Number(this.incomeMonth) - Number(this.expensesMonth) + (Number(depositAmount.value) * Number(depositPercent.value)) / 12;
+    this.budgetMonth = Number(this.budget) + Number(this.incomeMonth) - Number(this.expensesMonth) + (depositAmount.value * depositPercent.value) / 12;
     this.budgetDay = Math.floor(this.budgetMonth / 30);
   }
   
@@ -209,8 +211,8 @@ class AppData {
   }
   
   calcPeriod () {
+   
     return this.budgetMonth * Number(periodSelect.value);
-    console.log(appData.budgetMonth, `3`);
   }
   
   disableInput () {
@@ -227,7 +229,7 @@ class AppData {
     periodAmount.textContent = elem.target.value;
     
     incomePeriodValue.value = this.budgetMonth * elem.target.value;
-    console.log(appData.budgetMonth, `2`);
+   
   };
   
   start () {
@@ -245,7 +247,7 @@ class AppData {
     this.getBudget();
     this.disableInput();
     this.showResult();
-    console.log(appData.budgetMonth, `1`);
+    
   }
   
   reset () {
@@ -311,7 +313,7 @@ cancel.addEventListener(`click`, () => {
   appData.reset();
   appData = null;
   appData = new AppData();
-  console.dir(appData)
+ 
 });
 
 appData.eventsListeners();
