@@ -24,9 +24,20 @@ window.addEventListener(`DOMContentLoaded`, function () {
     function updateClock() {
 
       const timer = getTimeRemaining();
-      timerHours.textContent = timer.hours;
-      timerMinutes.textContent = timer.minutes;
-      timerSeconds.textContent = timer.seconds;
+      if (timer.hours < 10){
+        timerHours.textContent = `0${timer.hours}`;
+      }else{
+        timerHours.textContent = timer.hours;
+      }if (timer.minutes < 10){
+        timerMinutes.textContent = `0${timer.minutes}`;
+      }else{
+        timerMinutes.textContent = timer.minutes;
+      }if (timer.seconds < 10){
+        timerSeconds.textContent = `0${timer.seconds}`;
+      }else{
+        timerSeconds.textContent = timer.seconds;
+      };
+      
       if (timer.timeRemaining > 0) {
         // setTimeout(updateClock, 1000);
         setInterval(updateClock, 1000);
@@ -40,6 +51,6 @@ window.addEventListener(`DOMContentLoaded`, function () {
     updateClock();
   };
 
-  countTimer(`22 november 2019`);
+  countTimer(`23 november 2019`);
 
 });
