@@ -27,12 +27,19 @@ window.addEventListener(`DOMContentLoaded`, function () {
       timerHours.textContent = timer.hours;
       timerMinutes.textContent = timer.minutes;
       timerSeconds.textContent = timer.seconds;
+      if (timer.timeRemaining > 0) {
+        // setTimeout(updateClock, 1000);
+        setInterval(updateClock, 1000);
+      };
+      if (timer.timeRemaining < 0){
+        timerHours.textContent = `00`;
+      timerMinutes.textContent = `00`;
+      timerSeconds.textContent = `00`;
+      }
     };
-    if (timer.timeRemaining > 0) {
-      setTimeout(updateClock, 1000);
-    };
+    updateClock();
   };
 
-  countTimer(`01 december 2019`);
+  countTimer(`22 november 2019`);
 
 });
