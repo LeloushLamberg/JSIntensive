@@ -1,7 +1,7 @@
 window.addEventListener(`DOMContentLoaded`, function () {
   'use strict';
 
-  
+
   let dateNow = new Date()
   const timeOfDay = document.querySelector(`#time-of-day`);
   const timeHours = document.querySelector(`#time-hours`);
@@ -9,20 +9,21 @@ window.addEventListener(`DOMContentLoaded`, function () {
   const timeSeconds = document.querySelector(`#time-seconds`);
   const timing = document.querySelector(`#timing`);
   const countDay = document.querySelector(`#count-day`);
-  const countDay = document.querySelector(`#count-day`);
-  let hours = dateNow.getHours()
-  const minutes = dateNow.getMinutes()
-  const seconds = dateNow.getSeconds()
-  const weekDay = dateNow.getDay()
+  // const countDay = document.querySelector(`#count-day`);
+
   // const hours = dateNow.getHours()
   // const hours = dateNow.getHours()
   // console.log(hours);
-  
-  console.log(hours);
+
+  // console.log(hours);
+  const weekDay = dateNow.getDay()
 
   function updateClock() {
     dateNow = new Date();
-    weekDay = 
+    let hours = dateNow.getHours()
+    const minutes = dateNow.getMinutes()
+    const seconds = dateNow.getSeconds()
+    // weekDay = 
     if (hours >= 18) {
       timeOfDaytextContent = `ый вечер`;
     }
