@@ -48,7 +48,6 @@ window.addEventListener(`DOMContentLoaded`, function () {
 
     if (clock.hours > 12) {
       clock.hours -= 12;
-      // console.log(clock.hours);
       timeHours.textContent = clock.hours;
       timing.textContent = ` PM `;
     };
@@ -64,14 +63,14 @@ window.addEventListener(`DOMContentLoaded`, function () {
     } else {
       timeMinutes.textContent = clock.minutes;
     };
-    // console.log();
+   
     if (clock.seconds < 10) {
       timeSeconds.textContent = `0${clock.seconds}`;
     } else {
       timeSeconds.textContent = clock.seconds;
     };
 
-    setTimeout(updateClock, 10000);
+    setTimeout(updateClock, 1000);
   };
 
   function clockOf(newYear) {
