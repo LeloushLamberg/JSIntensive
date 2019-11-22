@@ -14,8 +14,19 @@ window.addEventListener(`DOMContentLoaded`, function () {
   // const hours = dateNow.getHours()
   // const hours = dateNow.getHours()
   // console.log(hours);
-
   // console.log(hours);
+  
+  
+      function dayOf(newYear) {
+        const dateNewYear = new Date(newYear).getTime();
+        const dateNow = new Date().getTime();
+        const action = Math.floor((dateNewYear - dateNow) / 1000 / 60 / 60 / 24);
+        return action;
+      };
+      
+      const count = dayOf(`01 january 2020`);
+      countDay.textContent = count;
+  
   const weekDay = document.querySelector(`#day-of-week`);
  const getWeekDay = dateNow.getDay();
  const weekDayArr = [`воскресенье`, `понедельник`, `вторник`, `среда`, `четверг`, `пятница`, `суббота`]
@@ -51,21 +62,24 @@ window.addEventListener(`DOMContentLoaded`, function () {
     } else {
       timeHours.textContent = hours;
     };
-    console.log(hours, minutes, seconds);
+    // console.log(hours, minutes, seconds);
     if (minutes < 10) {
       timeMinutes.textContent = `0${minutes}`;
     } else {
       timeMinutes.textContent = minutes;
     };
-
+    
     if (seconds < 10) {
       timeSeconds.textContent = `0${seconds}`;
     } else {
       timeSeconds.textContent = seconds;
     };
-
+    
     setTimeout(updateClock, 1000);
   };
+
+  updateClock();
+
   //   function getClock() {
   //     const timeNow = dateNow / 1000;
   //     const seconds = Math.floor(timeNow % 60);
@@ -84,19 +98,11 @@ window.addEventListener(`DOMContentLoaded`, function () {
   //     const clock = getClock();
   //     
   //   }
-
-
-  //   function clockOf(newYear) {
-  //     const dateNewYear = new Date(newYear).getTime();
-  //     const action = Math.floor((dateNewYear - dateNow)/1000 / 24);
   //     if (action < 10) {
   //       countDay.textContent = `0${action}`;
   //     } else {
   //       countDay.textContent = `${action}`
   //     };
-  //   };
 
-  //   clockOf(`01 january 2020`)
-  updateClock();
 
 });
