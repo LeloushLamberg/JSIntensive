@@ -9,6 +9,7 @@ window.addEventListener(`DOMContentLoaded`, function () {
   const timeSeconds = document.querySelector(`#time-seconds`);
   const timing = document.querySelector(`#timing`);
   const countDay = document.querySelector(`#count-day`);
+  const countDay = document.querySelector(`#count-day`);
   let hours = dateNow.getHours()
   const minutes = dateNow.getMinutes()
   const seconds = dateNow.getSeconds()
@@ -17,12 +18,13 @@ window.addEventListener(`DOMContentLoaded`, function () {
   // const hours = dateNow.getHours()
   // console.log(hours);
   
+  console.log(hours);
 
   function updateClock() {
-    dateNow = new Date()
-    console.log(hours);
+    dateNow = new Date();
+    weekDay = 
     if (hours >= 18) {
-      timeOfDay.textContent = `ый вечер`;
+      timeOfDaytextContent = `ый вечер`;
     }
     if (hours >= 12 && hours < 18) {
       timeOfDay.textContent = `ый день`;
