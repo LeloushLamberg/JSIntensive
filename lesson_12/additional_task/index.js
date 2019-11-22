@@ -39,7 +39,7 @@ window.addEventListener(`DOMContentLoaded`, function () {
     const seconds = dateNow.getSeconds()
     // weekDay = 
     if (hours >= 18) {
-      timeOfDaytextContent = `ый вечер`;
+      timeOfDay.textContent = `ый вечер`;
     }
     if (hours >= 12 && hours < 18) {
       timeOfDay.textContent = `ый день`;
