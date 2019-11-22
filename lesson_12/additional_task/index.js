@@ -16,7 +16,10 @@ window.addEventListener(`DOMContentLoaded`, function () {
   // console.log(hours);
 
   // console.log(hours);
-  const weekDay = dateNow.getDay()
+  const weekDay = document.querySelector(`#day-of-week`);
+ const getWeekDay = dateNow.getDay();
+ const weekDayArr = [`воскресенье`, `понедельник`, `вторник`, `среда`, `четверг`, `пятница`, `суббота`]
+  weekDay.textContent = weekDayArr[getWeekDay]; 
 
   function updateClock() {
     dateNow = new Date();
