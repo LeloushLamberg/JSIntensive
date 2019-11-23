@@ -1,8 +1,28 @@
 window.addEventListener(`DOMContentLoaded`, function () {
   'use strict';
   // Меню
-const toggleMenu = () =>
+const toggleMenu = () => {
+  const btnMenu = document.querySelector(`.menu`);
+  const menu = document.querySelector(`menu`);
+  const menuItems = menu.querySelectorAll(`ul > li`);
+  const closeBtn = menu.querySelector(`.close-btn`);
+  
+  
+  const actionMenu = () => {
+    if (menu.style.transform !== `translate(100%)`){
+      menu.style.transform = `translate(100%)`
+    }else{
+      menu.style.transform = `translate(-100%)`
+    };
+  };
 
+  btnMenu.addEventListener(`click`, actionMenu);
+  closeBtn.addEventListener(`click`, actionMenu);
+  for (let i = 0; i < menuItems.length; i++){
+    menuItems[i].addEventListener(`click`, actionMenu);
+  }
+};
+toggleMenu();
 
 
   // Таймер
@@ -11,7 +31,7 @@ const toggleMenu = () =>
       timerMinutes = document.querySelector(`#timer-minutes`),
       timerSeconds = document.querySelector(`#timer-seconds`);
 
-    function getTimeRemaining() {
+    const getTimeRemaining = () => {
       const dateStop = new Date(deadline).getTime(),
         dateNow = new Date().getTime(),
         timeRemaining = (dateStop - dateNow) / 1000,
@@ -26,7 +46,7 @@ const toggleMenu = () =>
       };
     }
 
-    function updateClock() {
+    const updateClock = () => {
 
       const timer = getTimeRemaining();
       if (timer.hours < 10) {
