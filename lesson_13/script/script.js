@@ -3,52 +3,28 @@ window.addEventListener(`DOMContentLoaded`, function () {
 
 
   // Меню
-const toggleMenu = () => {
-  const btnMenu = document.querySelector(`.menu`);
-  const menu = document.querySelector(`menu`);
-  const menuItems = menu.querySelectorAll(`ul > li`);
-  const closeBtn = menu.querySelector(`.close-btn`);
-  
-  
-  const actionMenu = () => {
+  const toggleMenu = () => {
+    const btnMenu = document.querySelector(`.menu`);
+    const menu = document.querySelector(`menu`);
+    const menuItems = menu.querySelectorAll(`ul > li`);
+    const closeBtn = menu.querySelector(`.close-btn`);
     
-    let countWidth = -100;
     
-    const animMenu = () => {
-      countWidth;
-      console.log(`До вызова `, countWidth);
-      menu.style.transform = `translate(${countWidth}%)`
-      if (countWidth < 100){
-        countWidth = countWidth + 1;
-        console.log(`+1 =`, countWidth, ` menu.style.transform =`,  menu.style.transform);
-      };
-    }
-    
-    if(screen.availWidth >= 768){
+    const actionMenu = () => {
       if (menu.style.transform !== `translate(100%)`){
-        setInterval(animMenu, 10);
+        menu.style.transform = `translate(100%)`
       }else{
         menu.style.transform = `translate(-100%)`
-      }
-
-      }else{
-        
-        if (menu.style.transform !== `translate(100%)`){
-          menu.style.transform = `translate(100%)`
-          }else{
-          menu.style.transform = `translate(-100%)`
-        }
-
-      }
-  }
-
-  btnMenu.addEventListener(`click`, actionMenu);
-  closeBtn.addEventListener(`click`, actionMenu);
-  for (let i = 0; i < menuItems.length; i++){
-    menuItems[i].addEventListener(`click`, actionMenu);
+      };
+    };
+  
+    btnMenu.addEventListener(`click`, actionMenu);
+    closeBtn.addEventListener(`click`, actionMenu);
+    for (let i = 0; i < menuItems.length; i++){
+      menuItems[i].addEventListener(`click`, actionMenu);
+    }
   };
-};
-toggleMenu();
+  toggleMenu();
 
 
   // Таймер
