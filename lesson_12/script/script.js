@@ -1,9 +1,5 @@
 window.addEventListener(`DOMContentLoaded`, function () {
   'use strict';
-  // Меню
-const toggleMenu = () =>
-
-
 
   // Таймер
   function countTimer(deadline) {
