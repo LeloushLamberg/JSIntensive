@@ -8,24 +8,39 @@ window.addEventListener(`DOMContentLoaded`, function () {
     const menu = document.querySelector(`menu`);
     const menuItems = menu.querySelectorAll(`ul > li`);
     const closeBtn = menu.querySelector(`.close-btn`);
-    
-    
+
+
     const actionMenu = () => {
-      if (menu.style.transform !== `translate(100%)`){
+      if (menu.style.transform !== `translate(100%)`) {
         menu.style.transform = `translate(100%)`
-      }else{
+      } else {
         menu.style.transform = `translate(-100%)`
       };
     };
-  
+
     btnMenu.addEventListener(`click`, actionMenu);
     closeBtn.addEventListener(`click`, actionMenu);
-    for (let i = 0; i < menuItems.length; i++){
-      menuItems[i].addEventListener(`click`, actionMenu);
-    }
+    menuItems.forEach((elem) => { elem.addEventListener(`click`, actionMenu) });
+    // for (let i = 0; i < menuItems.length; i++) {
+    //   menuItems[i].addEventListener(`click`, actionMenu);
+    // }
   };
   toggleMenu();
 
+  // Формы
+
+  const togglePopUp = () => {
+    const popup = document.querySelector(`.popup`);
+    const popupBtn = document.querySelectorAll(`.popup-btn`);
+    const popupClose = document.querySelector(`.popup-close`);
+
+    const openPopup = () => { popup.style.display = `block` };
+    const closePopup = () => { popup.style.display = `none` };
+
+    popupBtn.forEach((elem) => { elem.addEventListener(`click`, openPopup) });
+    popupClose.addEventListener(`click`, closePopup);
+  };
+  togglePopUp()
 
   // Таймер
   function countTimer(deadline) {
@@ -55,11 +70,13 @@ window.addEventListener(`DOMContentLoaded`, function () {
         timerHours.textContent = `0${timer.hours}`;
       } else {
         timerHours.textContent = timer.hours;
-      } if (timer.minutes < 10) {
+      }
+      if (timer.minutes < 10) {
         timerMinutes.textContent = `0${timer.minutes}`;
       } else {
         timerMinutes.textContent = timer.minutes;
-      } if (timer.seconds < 10) {
+      }
+      if (timer.seconds < 10) {
         timerSeconds.textContent = `0${timer.seconds}`;
       } else {
         timerSeconds.textContent = timer.seconds;
@@ -77,6 +94,6 @@ window.addEventListener(`DOMContentLoaded`, function () {
     };
     updateClock();
   };
-countTimer(`24 november 2019`);
+  countTimer(`25 november 2019`);
 
 });
