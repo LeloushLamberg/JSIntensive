@@ -28,19 +28,48 @@ window.addEventListener(`DOMContentLoaded`, function () {
   toggleMenu();
 
   // Формы
-
   const togglePopUp = () => {
     const popup = document.querySelector(`.popup`);
     const popupBtn = document.querySelectorAll(`.popup-btn`);
     const popupClose = document.querySelector(`.popup-close`);
-
+    
     const openPopup = () => { popup.style.display = `block` };
-    const closePopup = () => { popup.style.display = `none` };
+    const animationPopup = () => {
+      popup.style.display = `block`;
+      popup.style.opacity = `0`;
+      let opacity = 0;
+      const appearance = () => {
+        if (opacity > 1) {
+          clearInterval(timer);
 
-    popupBtn.forEach((elem) => { elem.addEventListener(`click`, openPopup) });
+          console.log(`таймер остановился`);
+        }else{
+           opacity += 0.02;
+           console.log(opacity);
+           popup.style.opacity = opacity;
+        } 
+      }
+      const timer = setInterval(appearance, 10);
+      
+    };
+    const closePopup = () => { popup.style.display = `none` };
+    const desktopPopup = () => {
+      popupBtn.forEach((elem) => { elem.addEventListener(`click`, animationPopup) });
+    }
+    const mobilePopup = () => {
+      popupBtn.forEach((elem) => { elem.addEventListener(`click`, openPopup) });
+      
+    }
+    if (document.documentElement.clientWidth <= 768) {
+      mobilePopup();
+    }else{
+      desktopPopup();
+    }
     popupClose.addEventListener(`click`, closePopup);
+
   };
   togglePopUp()
+
 
   // Таймер
   function countTimer(deadline) {
@@ -94,6 +123,6 @@ window.addEventListener(`DOMContentLoaded`, function () {
     };
     updateClock();
   };
-  countTimer(`25 november 2019`);
+  countTimer(`29 november 2019`);
 
 });
