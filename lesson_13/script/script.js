@@ -11,11 +11,12 @@ window.addEventListener(`DOMContentLoaded`, function () {
 
 
     const actionMenu = () => {
-      if (menu.style.transform !== `translate(100%)`) {
-        menu.style.transform = `translate(100%)`
-      } else {
-        menu.style.transform = `translate(-100%)`
-      };
+      // if (menu.style.transform !== `translate(100%)`) {
+      //   menu.style.transform = `translate(100%)`
+      // } else {
+      //   menu.style.transform = `translate(-100%)`
+      // };
+      menu.classList.toggle('active-menu');
     };
 
     btnMenu.addEventListener(`click`, actionMenu);
