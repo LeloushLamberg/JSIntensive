@@ -20,9 +20,7 @@ window.addEventListener(`DOMContentLoaded`, function () {
 
     btnMenu.addEventListener(`click`, actionMenu);
     closeBtn.addEventListener(`click`, actionMenu);
-    menuItems.forEach((elem) => {
-      elem.addEventListener(`click`, actionMenu)
-    });
+    menuItems.forEach((elem) => { elem.addEventListener(`click`, actionMenu) });
     // for (let i = 0; i < menuItems.length; i++) {
     //   menuItems[i].addEventListener(`click`, actionMenu);
     // }
@@ -35,58 +33,12 @@ window.addEventListener(`DOMContentLoaded`, function () {
     const popup = document.querySelector(`.popup`);
     const popupBtn = document.querySelectorAll(`.popup-btn`);
     const popupClose = document.querySelector(`.popup-close`);
-    const width = document.documentElement.clientWidth;
-    console.log(width);
-    const openPopup = () => {
-      popup.style.display = `block`
-    };
-    const closePopup = () => {
-      popup.style.display = `none`
-    };
 
+    const openPopup = () => { popup.style.display = `block` };
+    const closePopup = () => { popup.style.display = `none` };
 
-    if (width <= 768) {
-
-      popupBtn.forEach((elem) => {
-        elem.addEventListener(`click`, openPopup)
-      });
-      popupClose.addEventListener(`click`, closePopup);
-
-    } else {
-      const animationPopup = () => {
-        const start = Date.now();
-        const timePassed = Date.now() - start;
-
-        if (timePassed >= 2000) {
-          clearInterval(afterStart);
-          return;
-        }
-
-        appearance(timePassed);
-
-      };
-
-      const afterStart = setInterval(animationPopup, 20);
-
-      popupBtn.forEach((elem) => {
-        elem.addEventListener(`click`, afterStart)
-      });
-
-      popupClose.addEventListener(`click`, closePopup);
-
-      function appearance(timePassed) {
-        popup.style.display = `block`
-        
-        popup.style.width = timePassed / 5 + 'px';console.log(popup.style.width);
-      }
-
-
-
-      
-
-
-
-    }
+    popupBtn.forEach((elem) => { elem.addEventListener(`click`, openPopup) });
+    popupClose.addEventListener(`click`, closePopup);
   };
   togglePopUp()
 
@@ -142,6 +94,6 @@ window.addEventListener(`DOMContentLoaded`, function () {
     };
     updateClock();
   };
-  countTimer(`2019`, `10`, `24`, `17`, `00`, `00`);
+  countTimer(`25 november 2019`);
 
 });
